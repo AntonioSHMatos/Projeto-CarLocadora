@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "CarLocadora.Negocio/1.0.0": {
+        "dependencies": {
+          "CarLocadora.infra": "1.0.0"
+        },
+        "runtime": {
+          "CarLocadora.Negocio.dll": {}
+        }
+      },
+      "CarLocadora.infra/1.0.0": {
+        "runtime": {
+          "CarLocadora.infra.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CarLocadora.Negocio/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CarLocadora.infra/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

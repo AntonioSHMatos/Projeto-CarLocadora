@@ -1,0 +1,12 @@
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.infra\bin\Debug\net6.0\CarLocadora.infra.deps.json
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.infra\bin\Debug\net6.0\CarLocadora.infra.dll
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.infra\bin\Debug\net6.0\CarLocadora.infra.pdb
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.infra\obj\Debug\net6.0\CarLocadora.infra.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.infra\obj\Debug\net6.0\CarLocadora.infra.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.infra\obj\Debug\net6.0\CarLocadora.infra.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.infra\obj\Debug\net6.0\CarLocadora.infra.AssemblyInfo.cs
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.infra\obj\Debug\net6.0\CarLocadora.infra.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.infra\obj\Debug\net6.0\CarLocadora.infra.dll
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.infra\obj\Debug\net6.0\refint\CarLocadora.infra.dll
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.infra\obj\Debug\net6.0\CarLocadora.infra.pdb
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.infra\obj\Debug\net6.0\ref\CarLocadora.infra.dll
