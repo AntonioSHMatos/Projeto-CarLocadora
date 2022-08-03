@@ -15,7 +15,6 @@ namespace CarLocadora.API.Controllers
 
             ClienteModel clienteModel = new();
 
-
             clienteModel.Nome = "cidadão anonimo";
             clienteModel.CNH = "000.000.000.00";
 
