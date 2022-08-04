@@ -10,3 +10,15 @@ C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.Modelo\obj\Debug\net
 C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.Modelo\obj\Debug\net6.0\refint\CarLocadora.Models.dll
 C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.Modelo\obj\Debug\net6.0\CarLocadora.Models.pdb
 C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\CarLocadora.Modelo\obj\Debug\net6.0\ref\CarLocadora.Models.dll
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\Projeto-CarLocadora\CarLocadora.Modelo\bin\Debug\net6.0\CarLocadora.Models.deps.json
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\Projeto-CarLocadora\CarLocadora.Modelo\bin\Debug\net6.0\CarLocadora.Models.dll
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\Projeto-CarLocadora\CarLocadora.Modelo\bin\Debug\net6.0\CarLocadora.Models.pdb
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\Projeto-CarLocadora\CarLocadora.Modelo\obj\Debug\net6.0\CarLocadora.Models.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\Projeto-CarLocadora\CarLocadora.Modelo\obj\Debug\net6.0\CarLocadora.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\Projeto-CarLocadora\CarLocadora.Modelo\obj\Debug\net6.0\CarLocadora.Models.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\Projeto-CarLocadora\CarLocadora.Modelo\obj\Debug\net6.0\CarLocadora.Models.AssemblyInfo.cs
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\Projeto-CarLocadora\CarLocadora.Modelo\obj\Debug\net6.0\CarLocadora.Models.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\Projeto-CarLocadora\CarLocadora.Modelo\obj\Debug\net6.0\CarLocadora.Models.dll
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\Projeto-CarLocadora\CarLocadora.Modelo\obj\Debug\net6.0\refint\CarLocadora.Models.dll
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\Projeto-CarLocadora\CarLocadora.Modelo\obj\Debug\net6.0\CarLocadora.Models.pdb
+C:\Users\User\Desktop\aulas daniel\CAR-LOCADORA\Projeto-CarLocadora\CarLocadora.Modelo\obj\Debug\net6.0\ref\CarLocadora.Models.dll

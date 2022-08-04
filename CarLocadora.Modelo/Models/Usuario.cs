@@ -1,25 +1,28 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CarLocadora.Models.Models
 {
-    public class Cliente : Endereco
+    public class Usuario : Endereco
     {
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required(ErrorMessage = "CPF é Obrigatório")]
-        [StringLength(14, MinimumLength = 14 ,ErrorMessage = "Campo Maximo de 14 Caracteres")]
+        [Required(ErrorMessage = "Campo é obrigatório")]
+        [StringLength(14, MinimumLength = 14, ErrorMessage = "Campo máximo de 14 caracteres")]
         public string CPF { get; set; } = "";
 
-        
-        [Required(ErrorMessage = "CNH é Obrigatório")]
-        [StringLength(12, MinimumLength = 12, ErrorMessage = "Campo Maximo de 12 Caracteres")]
-        public string CNH { get; set; } = "";
+        [Required(ErrorMessage = "Campo é obrigatório")]
+        [StringLength(50, MinimumLength = 14, ErrorMessage = "Campo máximo de 50 caracteres")]
+        public string RG { get; set; } = "";
 
         [Display(Name = "Campo Completo")]
-        [Required(ErrorMessage = "0 Nome Completo é Obrigatório")]
-        [StringLength(150, MinimumLength = 5, ErrorMessage = "Este Campo deve ter no mínimo 5 e no maximo 150caracteres")]
+        [Required(ErrorMessage = "O nome completo é obrigatório")]
+        [StringLength(150, MinimumLength = 5, ErrorMessage = "Este campo deve conter no mínimo 5 e no máximo 150 caracteres")]
         public string Nome { get; set; } = "";
 
         [Display(Name = "Campo Obrigatorio")]
@@ -48,20 +51,24 @@ namespace CarLocadora.Models.Models
 
         [Required(ErrorMessage = "Campo é Obrigatório")]
         [StringLength(50, MinimumLength = 5, ErrorMessage = "Campo Maximo de 50 Caracteres")]
-        public string Cidade { get; set; } 
+        public string Cidade { get; set; }
 
         [Required(ErrorMessage = "Campo é Obrigatório")]
         [StringLength(2, MinimumLength = 2, ErrorMessage = "Campo Maximo de 2 Caracteres")]
         public string Estado { get; set; }
 
-        [Display(Name = "Campo Obrigatório")]
+        [StringLength(300, MinimumLength = 4, ErrorMessage = "Campo Maximo de 300 Caracteres")]
+        public  string Senha { get; set; }
+
+        
+        [Required(ErrorMessage = "Campo é Obrigatório")]
         public DateTime DataInclusao { get; set; }
 
 
-        [Display(Name = "Data Obrigatório")]
+        
+        [Required(ErrorMessage = "Campo é Obrigatório")]
         public DateTime? DataAlteracao { get; set; }
 
-        [Required(ErrorMessage = "Campo é Obrigatório")]
-        public bool Ativo { get; set; }
+        
     }
 }

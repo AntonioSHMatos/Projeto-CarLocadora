@@ -9,11 +9,11 @@ namespace CarLocadora.API.Controllers
     public class ClienteController : ControllerBase
     {
         [HttpGet()]
-        public List<ClienteModel> Get()
+        public List<Cliente> Get()
         {   
-            List<ClienteModel> listadeclientes = new List<ClienteModel>();
+            List<Cliente> listadeclientes = new List<Cliente>();
 
-            ClienteModel clienteModel = new();
+            Cliente clienteModel = new();
 
             clienteModel.Nome = "cidadão anonimo";
             clienteModel.CNH = "000.000.000.00";
