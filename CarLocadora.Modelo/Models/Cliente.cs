@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CarLocadora.Models.Models
 {
-    public class ClienteModel : EnderecoModel
+    public class Cliente : EnderecoModel
     {
 
         [Key]
