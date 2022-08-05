@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\aulas daniel\\CAR-LOCADORA\\Projeto-CarLocadora\\CarLocadora.Modelo\\CarLocadora.Models.csproj": {}
+    "C:\\Users\\User\\Desktop\\CarLocadora\\Projeto-CarLocadora\\CarLocadora.Modelo\\CarLocadora.Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\aulas daniel\\CAR-LOCADORA\\Projeto-CarLocadora\\CarLocadora.Modelo\\CarLocadora.Models.csproj": {
+    "C:\\Users\\User\\Desktop\\CarLocadora\\Projeto-CarLocadora\\CarLocadora.Modelo\\CarLocadora.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\aulas daniel\\CAR-LOCADORA\\Projeto-CarLocadora\\CarLocadora.Modelo\\CarLocadora.Models.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\CarLocadora\\Projeto-CarLocadora\\CarLocadora.Modelo\\CarLocadora.Models.csproj",
         "projectName": "CarLocadora.Models",
-        "projectPath": "C:\\Users\\User\\Desktop\\aulas daniel\\CAR-LOCADORA\\Projeto-CarLocadora\\CarLocadora.Modelo\\CarLocadora.Models.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\CarLocadora\\Projeto-CarLocadora\\CarLocadora.Modelo\\CarLocadora.Models.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\aulas daniel\\CAR-LOCADORA\\Projeto-CarLocadora\\CarLocadora.Modelo\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\CarLocadora\\Projeto-CarLocadora\\CarLocadora.Modelo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
