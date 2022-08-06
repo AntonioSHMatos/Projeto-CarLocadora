@@ -1,7 +1,5 @@
-﻿
-
-
-using CarLocadora.Entity;
+﻿using CarLocadora.Entity;
+using CarLocadora.Negocio.Cliente;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarLocadora.API.Extensoes
@@ -18,7 +16,7 @@ namespace CarLocadora.API.Extensoes
             services.AddDbContext<Context>(opt => opt.UseSqlServer(connectionString));
 
 
-            //services.AddScoped<ICategoriaNegocio, CategoriaNegocio>();
+            services.AddScoped<IClienteNegocio, ClienteNegocio>();
 
 
         }

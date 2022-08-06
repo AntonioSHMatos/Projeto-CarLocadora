@@ -9,6 +9,7 @@ namespace CarLocadora.Negocio.Cliente
 {
     public interface IClienteNegocio
     {
+        List<ClienteModel> ObterLista();
         void Alterar(ClienteModel cliente);
         void Inserir(ClienteModel cliente);
     }

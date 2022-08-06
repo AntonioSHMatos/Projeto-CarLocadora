@@ -15,6 +15,13 @@ namespace CarLocadora.API.Controllers
             _cliente = cliente;
         }
 
+        [HttpGet]
+        public List<ClienteModel> Get()
+        {
+            return _cliente.ObterLista();
+        }
+
+
         [HttpPost()]
         public void Post([FromBody] ClienteModel cliente)
         {

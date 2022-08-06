@@ -14,7 +14,7 @@ namespace CarLocadora.Models.Models
 
         
         [Required(ErrorMessage = "CNH é Obrigatório")]
-        [StringLength(12, MinimumLength = 12, ErrorMessage = "Campo Maximo de 12 Caracteres")]
+        [StringLength(12, ErrorMessage = "Campo Maximo de 12 Caracteres")]
         public string CNH { get; set; } = "";
 
         [Display(Name = "Campo Completo")]

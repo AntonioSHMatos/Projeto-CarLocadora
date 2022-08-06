@@ -23,8 +23,13 @@ namespace CarLocadora.Negocio.Cliente
 
         public void Inserir(ClienteModel cliente)
         {
-            _context.Update(cliente);
+            _context.AddAsync(cliente);
             _context.SaveChangesAsync();
+        }
+
+        public List<ClienteModel> ObterLista()
+        {
+            return _context.Cliente.ToList();
         }
     }
 }
