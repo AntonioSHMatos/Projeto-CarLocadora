@@ -21,6 +21,8 @@ namespace CarLocadora.Negocio.Usuario
             _context.SaveChangesAsync();
         }
 
+        
+
         public void Inserir(UsuarioModel usuario)
         {
             _context.Update(usuario);

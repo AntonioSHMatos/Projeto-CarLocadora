@@ -1,12 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarLocadora.Negocio.Categoria;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarLocadora.API.Controllers
 {
-    public class CategoriaController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CategoriaController : ControllerBase
     {
-        public IActionResult Index()
+        private readonly ICategoriaNegocio _categoriaNegocio;
+
+        public CategoriaController(ICategoriaNegocio categoriaNegocio)
         {
-            return View();
+            _categoriaNegocio = categoriaNegocio;
         }
+        [HttpDelete()]
+        public void Deletar([FromQuery]int Id)
+        {
+            _categoriaNegocio.Excluir(Id);
+        }
+
+
+
+
+
     }
 }

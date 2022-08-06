@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarLocadora.API.Controllers
 {
-    public class FormaPagamentoController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class FormaPagamentoController : ControllerBase
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
     }
 }
