@@ -1,4 +1,4 @@
-namespace Carlocadora.Front.Models
+namespace CarLocadora.Front.Models
 {
     public class ErrorViewModel
     {

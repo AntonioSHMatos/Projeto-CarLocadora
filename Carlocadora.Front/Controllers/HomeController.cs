@@ -1,8 +1,8 @@
-﻿using Carlocadora.Front.Models;
+﻿using CarLocadora.Front.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace Carlocadora.Front.Controllers
+namespace CarLocadora.Front.Controllers
 {
     public class HomeController : Controller
     {
