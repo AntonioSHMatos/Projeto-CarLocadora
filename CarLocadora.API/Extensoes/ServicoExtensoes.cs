@@ -1,5 +1,9 @@
 ﻿using CarLocadora.Entity;
+using CarLocadora.Negocio.Categoria;
 using CarLocadora.Negocio.Cliente;
+using CarLocadora.Negocio.FormaPagamento;
+using CarLocadora.Negocio.Usuario;
+using CarLocadora.Negocio.VeiculoNegocio.cs;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarLocadora.API.Extensoes
@@ -17,7 +21,10 @@ namespace CarLocadora.API.Extensoes
 
 
             services.AddScoped<IClienteNegocio, ClienteNegocio>();
-
+            services.AddScoped<IUsuarioNegocio, UsuarioNegocio>();
+            services.AddScoped<IFormaPagamentoNegocio, FormaPagamentoNegocio>();
+            services.AddScoped<ICategoriaNegocio, CategoriaNegocio>();
+            services.AddScoped<IVeiculoNegocio, VeiculoNegocio>();
 
         }
     }

@@ -1,31 +1,31 @@
 ﻿using CarLocadora.Entity;
-using CarLocadora.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarLocadora.Negocio.VeiculoNegocio.cs
+namespace CarLocadora.Negocio.FormaPagamento
 {
-    public class VeiculoNegocio : IVeiculoNegocio
+    public class FormaPagamentoNegocio : IFormaPagamentoNegocio
     {
         private readonly Context _context;
-        public VeiculoNegocio(Context context)
+        public FormaPagamentoNegocio(Context context)
         {
             _context = context;
         }
-        public void Alterar(VeiculoModel veiculo)
+        public void Alterar(FormaPagamentoNegocio pagamento)
         {
-            _context.Update(veiculo);
+            _context.Update(pagamento);
             _context.SaveChangesAsync();
         }
 
-        public void Inserir(VeiculoModel veiculo)
+        public void Inserir(FormaPagamentoNegocio pagamento)
         {
-            _context.Update(veiculo);
+            _context.AddAsync(pagamento);
             _context.SaveChangesAsync();
         }
 
+        
     }
 }

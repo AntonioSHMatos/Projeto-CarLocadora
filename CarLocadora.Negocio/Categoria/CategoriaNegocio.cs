@@ -18,11 +18,27 @@ namespace CarLocadora.Negocio.Categoria
             _context = context;
         }
 
+        public void Alterar(CategoriaModel categoriaNegocio)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Excluir(int Id)
         {
             CategoriaModel categoria =  _context.Categoria.SingleOrDefault(x => x.Id == Id);
             _context.Categoria.Remove(categoria);
             _context.SaveChangesAsync();
+        }
+
+        public void Inserir(CategoriaModel categoriaNegocio)
+        {
+            _context.AddAsync(categoriaNegocio);
+            _context.SaveChangesAsync();
+        }
+
+        public List<CategoriaModel> ObterLista()
+        {
+            return _context.Categoria.ToList();
         }
     }
 }

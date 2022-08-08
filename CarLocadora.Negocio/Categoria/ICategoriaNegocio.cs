@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarLocadora.Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,9 @@ namespace CarLocadora.Negocio.Categoria
     public interface ICategoriaNegocio
     {
         void Excluir(int Id);
-
+        List<CategoriaModel> ObterLista();
+               
+        void Alterar(CategoriaModel categoriaNegocio);
+        void Inserir(CategoriaModel categoriaNegocio);
     }
 }

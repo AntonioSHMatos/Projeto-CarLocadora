@@ -9,7 +9,7 @@ namespace CarLocadora.Models.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required(ErrorMessage = "CPF é Obrigatório")]
-        [StringLength(14, MinimumLength = 14 ,ErrorMessage = "Campo Maximo de 14 Caracteres")]
+        [StringLength(14, ErrorMessage = "Campo Maximo de 14 Caracteres")]
         public string CPF { get; set; } = "";
 
         
@@ -19,7 +19,7 @@ namespace CarLocadora.Models.Models
 
         [Display(Name = "Campo Completo")]
         [Required(ErrorMessage = "0 Nome Completo é Obrigatório")]
-        [StringLength(150, MinimumLength = 5, ErrorMessage = "Este Campo deve ter no mínimo 5 e no maximo 150caracteres")]
+        [StringLength(150, ErrorMessage = "Este Campo deve ter no mínimo 5 e no maximo 150caracteres")]
         public string Nome { get; set; } = "";
 
         [Display(Name = "Campo Obrigatorio")]
