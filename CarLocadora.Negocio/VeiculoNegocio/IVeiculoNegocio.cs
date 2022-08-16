@@ -12,6 +12,7 @@ namespace CarLocadora.Negocio.VeiculoNegocio.cs
         void Alterar(VeiculoModel veiculo);
         void Inserir(VeiculoModel veiculo);
 
+        List<VeiculoModel> ObterLista();
 
     }
 }

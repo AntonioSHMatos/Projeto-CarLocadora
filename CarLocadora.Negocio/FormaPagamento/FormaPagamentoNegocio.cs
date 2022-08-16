@@ -1,9 +1,5 @@
 ﻿using CarLocadora.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CarLocadora.Models.Models;
 
 namespace CarLocadora.Negocio.FormaPagamento
 {
@@ -14,18 +10,23 @@ namespace CarLocadora.Negocio.FormaPagamento
         {
             _context = context;
         }
-        public void Alterar(FormaPagamentoNegocio pagamento)
+        
+
+        public void Alterar(FormaPagamentoModel pagamento)
         {
             _context.Update(pagamento);
             _context.SaveChangesAsync();
         }
 
-        public void Inserir(FormaPagamentoNegocio pagamento)
+        public void Inserir(FormaPagamentoModel pagamento)
         {
             _context.AddAsync(pagamento);
             _context.SaveChangesAsync();
         }
 
-        
+        public List<FormaPagamentoModel> ObterLista()
+        {
+            return _context.FormaPagamento.ToList();
+        }
     }
 }

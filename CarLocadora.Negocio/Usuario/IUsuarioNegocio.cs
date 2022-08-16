@@ -12,7 +12,7 @@ namespace CarLocadora.Negocio.Usuario
         void Alterar(UsuarioModel usuario);
         void Inserir(UsuarioModel usuario);
 
-       
+        List<UsuarioModel> ObterLista();
 
     }
 }

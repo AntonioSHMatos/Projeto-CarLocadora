@@ -27,5 +27,9 @@ namespace CarLocadora.Negocio.VeiculoNegocio.cs
             _context.SaveChangesAsync();
         }
 
+        public List<VeiculoModel> ObterLista()
+        {
+            return _context.Veiculo.ToList();
+        }
     }
 }

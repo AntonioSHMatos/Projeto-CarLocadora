@@ -27,6 +27,12 @@ namespace CarLocadora.API.Controllers
             _veiculo.Alterar(veiculo);
 
         }
+        [HttpGet()]
+        public List<VeiculoModel> Get()
+        {
+            return _veiculo.ObterLista();
+        }
+
 
 
 

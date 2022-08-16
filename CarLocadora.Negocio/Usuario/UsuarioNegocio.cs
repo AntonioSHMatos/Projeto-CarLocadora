@@ -21,7 +21,7 @@ namespace CarLocadora.Negocio.Usuario
             _context.SaveChangesAsync();
         }
 
-        
+
 
         public void Inserir(UsuarioModel usuario)
         {
@@ -29,6 +29,9 @@ namespace CarLocadora.Negocio.Usuario
             _context.SaveChangesAsync();
         }
 
-
+        public List<UsuarioModel> ObterLista()
+        {
+            return _context.Usuario.ToList();
+        }
     }
 }

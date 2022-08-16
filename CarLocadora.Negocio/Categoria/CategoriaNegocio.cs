@@ -20,7 +20,8 @@ namespace CarLocadora.Negocio.Categoria
 
         public void Alterar(CategoriaModel categoriaNegocio)
         {
-            throw new NotImplementedException();
+            _context.Update(categoriaNegocio);
+            _context.SaveChangesAsync();
         }
 
         public void Excluir(int Id)

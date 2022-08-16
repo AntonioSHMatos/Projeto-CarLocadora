@@ -16,7 +16,7 @@ namespace CarLocadora.Models.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Campo é Obrigatório")]
-        [StringLength(100, MinimumLength = 5, ErrorMessage = "Campo Maximo de 100 Caracteres")]
+        [StringLength(100, ErrorMessage = "Campo Maximo de 100 Caracteres")]
         public string Descricao { get; set; }
 
         [Required(ErrorMessage = "Campo é Obrigatório")]

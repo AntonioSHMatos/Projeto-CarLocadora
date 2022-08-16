@@ -1,5 +1,7 @@
-var builder = WebApplication.CreateBuilder(args);
+using CarLocadora.Front.Models;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<DadosBase>(builder.Configuration.GetSection("DadosBase"));
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

@@ -26,5 +26,11 @@ namespace CarLocadora.API.Controllers
             _usuario.Alterar(usuario);
 
         }
+        [HttpGet()]
+        public List<UsuarioModel> Get()
+        {
+            return _usuario.ObterLista();
+        }
+
     }
 }

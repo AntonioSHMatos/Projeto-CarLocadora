@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarLocadora.Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,9 @@ namespace CarLocadora.Negocio.FormaPagamento
 {
     public interface IFormaPagamentoNegocio
     {       
-        void Alterar(FormaPagamentoNegocio pagamento);
-        void Inserir(FormaPagamentoNegocio pagamento);
+        void Alterar(FormaPagamentoModel pagamento);
+        void Inserir(FormaPagamentoModel pagamento);
+        List<FormaPagamentoModel> ObterLista();
 
     }
 }

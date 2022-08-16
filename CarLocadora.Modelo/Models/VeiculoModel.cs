@@ -17,29 +17,29 @@ namespace CarLocadora.Models.Models
         public string Placa { get; set; }
 
 
-        [StringLength(100, MinimumLength = 17, ErrorMessage = "Campo Maximo de 100 Caracteres")]
+        [StringLength(100, ErrorMessage = "Campo Maximo de 100 Caracteres")]
         public string Chassi { get; set; }
 
         [Required(ErrorMessage = "Campo é obrigatório")]
-        [StringLength(100, MinimumLength = 5, ErrorMessage = "Campo Maximo de 100 Caracteres")]
+        [StringLength(100, ErrorMessage = "Campo Maximo de 100 Caracteres")]
         public string Marca { get; set; }
 
         [Required(ErrorMessage = "O Modelo é obrigatório")]
         public string Modelo { get; set; }
 
         [Required(ErrorMessage = "Campo é obrigatório")]
-        [StringLength(100, MinimumLength = 5, ErrorMessage = "Campo Maximo de 100 Caracteres")]
+        [StringLength(100,  ErrorMessage = "Campo Maximo de 100 Caracteres")]
         public string combustivel;
 
 
 
         [Required(ErrorMessage = "Campo é obrigatório")]
-        [StringLength(100, MinimumLength = 5, ErrorMessage = "Campo Maximo de 100 Caracteres")]
+        [StringLength(100, ErrorMessage = "Campo Maximo de 100 Caracteres")]
         public string Cor { get; set; }
 
 
 
-        [StringLength(2000, MinimumLength = 10, ErrorMessage = "Campo Maximo de 2000 Caracteres")]
+        [StringLength(2000, ErrorMessage = "Campo Maximo de 2000 Caracteres")]
         public string Opcionais { get; set; }
 
         [Required(ErrorMessage = "Campo é Obrigatório")]
