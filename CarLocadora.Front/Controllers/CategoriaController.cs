@@ -48,28 +48,7 @@ namespace CarLocadora.Front.Controllers
             }
 
         }
-        public ActionResult Details(int id)
-        {
-
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
-
-            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria").Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                string conteudo = response.Content.ReadAsStringAsync().Result;
-                return View(JsonConvert.DeserializeObject<List<CategoriaModel>>(conteudo));
-            }
-            else
-            {
-                throw new Exception("LIGUE PARA O DEV!");
-            }
-
-            return View();
-        }
+        
 
 
 

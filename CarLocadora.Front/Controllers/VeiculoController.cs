@@ -45,27 +45,7 @@ namespace CarLocadora.Front.Controllers
             }
         }
 
-        // GET: VeiculoController/Details/5
-        public ActionResult Details(string placa)
-        {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
-
-
-            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Veiculo").Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                string conteudo = response.Content.ReadAsStringAsync().Result;
-                return View(JsonConvert.DeserializeObject<VeiculoModel>(conteudo));
-            }
-            else
-            {
-                throw new Exception("LIGUE PARA O DEV!");
-            }
-        }
+       
 
         // GET: VeiculoController/Create
         public ActionResult Create()
@@ -163,26 +143,7 @@ namespace CarLocadora.Front.Controllers
             }
 
         }
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CategoriaController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+        
         private List<SelectListItem> CarregarCategoriasDeVeiculos()
         {
             List<SelectListItem> lista = new List<SelectListItem>();

@@ -46,28 +46,7 @@ namespace CarLocadora.Front.Controllers
             }
 
         }
-        public ActionResult Details(int id)
-        {
-
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
-
-            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Vistoria").Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                string conteudo = response.Content.ReadAsStringAsync().Result;
-                return View(JsonConvert.DeserializeObject<List<VistoriaModel>>(conteudo));
-            }
-            else
-            {
-                throw new Exception("LIGUE PARA O DEV!");
-            }
-
-            return View();
-        }
+       
 
 
 
@@ -163,27 +142,7 @@ namespace CarLocadora.Front.Controllers
                 return View();
             }
         }
-
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CategoriaController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+               
 
     }
 }
