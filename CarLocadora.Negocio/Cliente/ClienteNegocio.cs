@@ -17,19 +17,26 @@ namespace CarLocadora.Negocio.Cliente
         }
         public void Alterar(ClienteModel cliente)
         {
+            cliente.DataAlteracao = DateTime.Now;
             _context.Update(cliente);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void Inserir(ClienteModel cliente)
         {
-            _context.AddAsync(cliente);
-            _context.SaveChangesAsync();
+            cliente.DataInclusao = DateTime.Now;
+             _context.AddAsync(cliente);
+             _context.SaveChanges();
         }
 
         public List<ClienteModel> ObterLista()
         {
             return _context.Cliente.ToList();
+        }
+        public ClienteModel ObterUmCliente(string cpf)
+        {            
+            return _context.Cliente.SingleOrDefault(x => x.CPF == cpf);
+            
         }
     }
 }

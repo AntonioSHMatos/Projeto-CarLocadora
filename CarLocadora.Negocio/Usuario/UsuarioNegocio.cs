@@ -17,21 +17,29 @@ namespace CarLocadora.Negocio.Usuario
         }
         public void Alterar(UsuarioModel usuario)
         {
-            _context.Update(usuario);
-            _context.SaveChangesAsync();
+
+            usuario.DataAlteracao = DateTime.Now;
+             _context.Update(usuario);
+             _context.SaveChanges();
         }
 
 
 
         public void Inserir(UsuarioModel usuario)
         {
-            _context.Update(usuario);
-            _context.SaveChangesAsync();
+            usuario.DataInclusao = DateTime.Now;
+             _context.Add(usuario);
+             _context.SaveChanges();
         }
 
         public List<UsuarioModel> ObterLista()
         {
             return _context.Usuario.ToList();
+        }
+
+        public UsuarioModel ObterUmUsuario(string CPF)
+        {
+            return _context.Usuario.SingleOrDefault(x => x.CPF == CPF);
         }
     }
 }

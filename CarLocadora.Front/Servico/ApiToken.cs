@@ -1,11 +1,11 @@
-﻿using CarLocadora.Front.ApiToken;
+﻿
 using CarLocadora.Front.Models;
 using CarLocadora.Models.Models;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 
-namespace CarLocadora.Servico
+namespace CarLocadora.Front.Servico
 {
     public class ApiToken :IApiToken
 
@@ -24,7 +24,7 @@ namespace CarLocadora.Servico
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            LoginRequisacaoModel loginRequisacaoModel = new LoginRequisacaoModel();
+            LoginRequisicaoModel loginRequisacaoModel = new LoginRequisicaoModel();
             loginRequisacaoModel.Usuario = "UsuarioDevPratica";
             loginRequisacaoModel.Senha = "SenhaDevPratica";
 

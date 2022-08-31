@@ -4,9 +4,12 @@
      ViewData["Title"] = "Index";
 }
 
+<h1>Veículos</h1>
+
 <p>
-    <a asp-action="Criar"></a>
+    <a asp-action="Create">Criar Novo</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -71,9 +74,9 @@
                 @Html.DisplayFor(modelItem => item.DataAlteracao)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Editar", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Detalhes", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Deletar", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Editar", "Edit", new {  placa=item.Placa  }) 
+                
+                
             </td>
         </tr>
 }

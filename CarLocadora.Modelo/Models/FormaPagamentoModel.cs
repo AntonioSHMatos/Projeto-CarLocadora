@@ -12,10 +12,11 @@ namespace CarLocadora.Models.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required(ErrorMessage = "Campo é Obrigatório")]
+        [Required(ErrorMessage = "Id é Obrigatório")]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Campo é Obrigatório")]
+        [Display(Name = "Descrição ")]
+        [Required(ErrorMessage = "Descrição é Obrigatório")]
         [StringLength(150, ErrorMessage = "Campo Maximo de 150 Caracteres")]
         public string Descricao { get; set; }
 

@@ -17,19 +17,27 @@ namespace CarLocadora.Negocio.VeiculoNegocio.cs
         }
         public void Alterar(VeiculoModel veiculo)
         {
-            _context.Update(veiculo);
-            _context.SaveChangesAsync();
+            veiculo.DataAlteracao = DateTime.Now;
+             _context.Update(veiculo);
+             _context.SaveChanges();
         }
 
         public void Inserir(VeiculoModel veiculo)
         {
-            _context.Update(veiculo);
-            _context.SaveChangesAsync();
+
+            veiculo.DataInclusao = DateTime.Now;
+             _context.Add(veiculo);
+             _context.SaveChanges();
         }
 
         public List<VeiculoModel> ObterLista()
         {
             return _context.Veiculo.ToList();
+        }
+
+        public VeiculoModel ObterUmVeiculo(string placa)
+        {
+            return _context.Veiculo.SingleOrDefault(x => x.Placa == placa);
         }
     }
 }

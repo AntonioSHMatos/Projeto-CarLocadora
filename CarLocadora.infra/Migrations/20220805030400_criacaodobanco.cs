@@ -9,7 +9,7 @@ namespace CarLocadora.infra.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Categoria",
                 columns: table => new
                 {
@@ -23,10 +23,10 @@ namespace CarLocadora.infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categoria", x => x.Id);
+                    _ = table.PrimaryKey("PK_Categoria", x => x.Id);
                 });
 
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Cliente",
                 columns: table => new
                 {
@@ -47,10 +47,10 @@ namespace CarLocadora.infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cliente", x => x.CPF);
+                    _ = table.PrimaryKey("PK_Cliente", x => x.CPF);
                 });
 
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "FormaPagamento",
                 columns: table => new
                 {
@@ -63,10 +63,10 @@ namespace CarLocadora.infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FormaPagamento", x => x.Id);
+                    _ = table.PrimaryKey("PK_FormaPagamento", x => x.Id);
                 });
 
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Usuario",
                 columns: table => new
                 {
@@ -87,10 +87,10 @@ namespace CarLocadora.infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuario", x => x.CPF);
+                    _ = table.PrimaryKey("PK_Usuario", x => x.CPF);
                 });
 
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Veiculo",
                 columns: table => new
                 {
@@ -106,25 +106,25 @@ namespace CarLocadora.infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Veiculo", x => x.Placa);
+                    _ = table.PrimaryKey("PK_Veiculo", x => x.Placa);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Categoria");
 
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Cliente");
 
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "FormaPagamento");
 
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Usuario");
 
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "Veiculo");
         }
     }

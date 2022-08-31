@@ -1,5 +1,6 @@
 ﻿using CarLocadora.Models.Models;
 using CarLocadora.Negocio.FormaPagamento;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace CarLocadora.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FormaPagamentoController : ControllerBase
     {
         private readonly IFormaPagamentoNegocio _pagamento;
@@ -34,6 +36,11 @@ namespace CarLocadora.API.Controllers
             return _pagamento.ObterLista();
         }
 
+        [HttpGet("ObterUmPagamento")]
+        public FormaPagamentoModel Get([FromQuery] int id)
+        {
+            return _pagamento.ObterUmPagamento(id);
+        }
 
     }
 }

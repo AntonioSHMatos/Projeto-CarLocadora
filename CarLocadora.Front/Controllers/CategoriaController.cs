@@ -1,5 +1,6 @@
-ï»¿using CarLocadora.Front.ApiToken;
+
 using CarLocadora.Front.Models;
+using CarLocadora.Front.Servico;
 using CarLocadora.Models.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +10,12 @@ using System.Net.Http.Headers;
 
 namespace CarLocadora.Front.Controllers
 {
-    
+
     public class CategoriaController : Controller
     {
         private readonly IOptions<DadosBase> _dadosbase;
         private readonly IApiToken _apiToken;
+
         public CategoriaController(IOptions<DadosBase> dadosbase, IApiToken apiToken)
         {
             _dadosbase = dadosbase;
@@ -34,7 +36,7 @@ namespace CarLocadora.Front.Controllers
 
 
             HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria").Result;
-           // HttpResponseMessage response = client.GetAsync($"https://localhost:44357/api/Categoria").Result;
+
             if (response.IsSuccessStatusCode)
             {
                 string conteudo = response.Content.ReadAsStringAsync().Result;
@@ -46,9 +48,40 @@ namespace CarLocadora.Front.Controllers
             }
 
         }
-
-        // GET: CategoriaController/Details/5
         public ActionResult Details(int id)
+        {
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+
+            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string conteudo = response.Content.ReadAsStringAsync().Result;
+                return View(JsonConvert.DeserializeObject<List<CategoriaModel>>(conteudo));
+            }
+            else
+            {
+                throw new Exception("LIGUE PARA O DEV!");
+            }
+
+            return View();
+        }
+
+
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([FromForm] CategoriaModel categoria)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
@@ -56,12 +89,11 @@ namespace CarLocadora.Front.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Veiculo").Result;
+            HttpResponseMessage response = client.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Categoria", categoria).Result;
 
             if (response.IsSuccessStatusCode)
             {
-                string conteudo = response.Content.ReadAsStringAsync().Result;
-                return View(JsonConvert.DeserializeObject<VeiculoModel>(conteudo));
+                return RedirectToAction(nameof(Index));
             }
             else
             {
@@ -69,41 +101,64 @@ namespace CarLocadora.Front.Controllers
             }
         }
 
-        // GET: CategoriaController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CategoriaController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: CategoriaController/Edit/5
         public ActionResult Edit(int id)
         {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+
+
+            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria/ObterDadosCategoria?id={id}").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string conteudo = response.Content.ReadAsStringAsync().Result;
+                return View(JsonConvert.DeserializeObject<CategoriaModel>(conteudo));
+            }
+            else
+            {
+                throw new Exception("LIGUE PARA O DEV!");
+            }
+
+
+
             return View();
         }
 
         // POST: CategoriaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit([FromForm] CategoriaModel categoria)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+
+
+                    HttpClient client = new HttpClient();
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+
+                    HttpResponseMessage response = client.PutAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Categoria", categoria).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        throw new Exception("LIGUE PARA O DEV!");
+                    }
+
+                }
+                else
+                {
+                    return View();
+                }
             }
             catch
             {
@@ -111,24 +166,20 @@ namespace CarLocadora.Front.Controllers
             }
         }
 
-        // GET: CategoriaController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        // POST: CategoriaController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            HttpResponseMessage response = client.DeleteAsync($"{_dadosbase.Value.API_URL_BASE}Categoria?id={id}").Result;
+            if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { mensagem = "Registro excluído!", sucesso = true });
             }
-            catch
+            else
             {
-                return View();
+                throw new Exception("Ligue Para o Dev!");
             }
         }
     }

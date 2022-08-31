@@ -12,7 +12,8 @@ namespace CarLocadora.Negocio.Categoria
         void Excluir(int Id);
         List<CategoriaModel> ObterLista();
                
-        void Alterar(CategoriaModel categoriaNegocio);
-        void Inserir(CategoriaModel categoriaNegocio);
+        void Alterar(CategoriaModel categoria);
+        void Inserir(CategoriaModel categoria);
+        CategoriaModel ObterUmaCategoria(int id);
     }
 }

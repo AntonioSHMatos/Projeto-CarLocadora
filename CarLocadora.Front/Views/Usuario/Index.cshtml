@@ -7,7 +7,7 @@
 
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Criar Novo</a>
 </p>
 <table class="table">
     <thead>
@@ -103,9 +103,9 @@
                 @Html.DisplayFor(modelItem => item.DataAlteracao)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Editar", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Detlhes", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Deletar", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Editar", "Edit", new { cpf=item.CPF }) 
+                
+               
             </td>
         </tr>
 }

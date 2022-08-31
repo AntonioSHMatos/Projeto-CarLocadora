@@ -12,5 +12,6 @@ namespace CarLocadora.Negocio.Cliente
         List<ClienteModel> ObterLista();
         void Alterar(ClienteModel cliente);
         void Inserir(ClienteModel cliente);
+        ClienteModel ObterUmCliente(string cpf);
     }
 }

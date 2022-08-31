@@ -14,5 +14,6 @@ namespace CarLocadora.Negocio.VeiculoNegocio.cs
 
         List<VeiculoModel> ObterLista();
 
+        VeiculoModel ObterUmVeiculo(string placa);
     }
 }

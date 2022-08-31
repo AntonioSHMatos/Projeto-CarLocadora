@@ -1,5 +1,6 @@
 ﻿using CarLocadora.Models.Models;
 using CarLocadora.Negocio.Categoria;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace CarLocadora.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoriaController : ControllerBase
     {
         private readonly ICategoriaNegocio _categoriaNegocio;
@@ -42,6 +44,11 @@ namespace CarLocadora.API.Controllers
 
         }
 
+        [HttpGet("ObterDadosCategoria")]
+        public CategoriaModel Get([FromQuery] int id)
+        {
+            return _categoriaNegocio.ObterUmaCategoria(id);
+        }
 
 
     }

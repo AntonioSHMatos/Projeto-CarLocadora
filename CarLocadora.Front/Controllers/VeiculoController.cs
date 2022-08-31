@@ -1,11 +1,9 @@
-﻿using CarLocadora.Front.ApiToken;
 using CarLocadora.Front.Models;
+using CarLocadora.Front.Servico;
 using CarLocadora.Models.Models;
-using CarLocadora.Servico;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
-using MySql.Data.MySqlClient.Memcached;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 
@@ -72,21 +70,32 @@ namespace CarLocadora.Front.Controllers
         // GET: VeiculoController/Create
         public ActionResult Create()
         {
+            ViewBag.CategoriasDeVeiculos = CarregarCategoriasDeVeiculos();
+
             return View();
         }
 
         // POST: VeiculoController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+
+        public ActionResult Create([FromForm] VeiculoModel veiculo)
         {
-            try
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+
+
+            HttpResponseMessage response = client.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Veiculo", veiculo).Result;
+
+            if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            else
             {
-                return View();
+                throw new Exception("LIGUE PARA O DEV!");
             }
         }
 
@@ -99,10 +108,12 @@ namespace CarLocadora.Front.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Veiculo?placa={placa}").Result;
+            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Veiculo/ObterUmVeiculo?placa={placa}").Result;
 
             if (response.IsSuccessStatusCode)
             {
+                ViewBag.CategoriasDeVeiculos = CarregarCategoriasDeVeiculos();
+
                 string conteudo = response.Content.ReadAsStringAsync().Result;
                 return View(JsonConvert.DeserializeObject<VeiculoModel>(conteudo));
             }
@@ -133,7 +144,7 @@ namespace CarLocadora.Front.Controllers
 
                     if (response.IsSuccessStatusCode)
                     {
-                        return RedirectToAction(nameof(Index), new { mensagem = "Veiculo Editado", sucesso = true });
+                        return RedirectToAction(nameof(Index));
                     }
                     else
                     {
@@ -171,9 +182,44 @@ namespace CarLocadora.Front.Controllers
                 return View();
             }
         }
+
+        private List<SelectListItem> CarregarCategoriasDeVeiculos()
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+
+            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                string conteudo = response.Content.ReadAsStringAsync().Result;
+                List<CategoriaModel> categorias = JsonConvert.DeserializeObject<List<CategoriaModel>>(conteudo);
+
+                foreach (var linha in categorias)
+                {
+                    lista.Add(new SelectListItem()
+                    {
+                        Value = linha.Id.ToString(),
+                        Text = linha.Descricao,
+                        Selected = false,
+                    });
+                }
+
+                return lista;
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
+
     }
 }
-    
+
 
 
 

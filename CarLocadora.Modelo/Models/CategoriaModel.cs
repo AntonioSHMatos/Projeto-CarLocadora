@@ -28,7 +28,7 @@ namespace CarLocadora.Models.Models
         [Required(ErrorMessage = "Campo é Obrigatório")]
         public DateTime DataInclusao { get; set; }
 
-        public DateTime DataAlteracao { get; set; }
+        public DateTime? DataAlteracao { get; set; }
 
     }
 }

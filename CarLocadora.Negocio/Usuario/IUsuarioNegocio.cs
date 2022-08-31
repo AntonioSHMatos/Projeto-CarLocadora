@@ -14,5 +14,6 @@ namespace CarLocadora.Negocio.Usuario
 
         List<UsuarioModel> ObterLista();
 
+        UsuarioModel ObterUmUsuario(string CPF);
     }
 }

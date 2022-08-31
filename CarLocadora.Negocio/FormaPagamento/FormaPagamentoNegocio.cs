@@ -14,19 +14,31 @@ namespace CarLocadora.Negocio.FormaPagamento
 
         public void Alterar(FormaPagamentoModel pagamento)
         {
+            pagamento.DataAlteracao = DateTime.Now;
             _context.Update(pagamento);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
+
+           
+
         }
 
         public void Inserir(FormaPagamentoModel pagamento)
         {
+            pagamento.DataInclusao = DateTime.Now;
             _context.AddAsync(pagamento);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
+
+
         }
 
         public List<FormaPagamentoModel> ObterLista()
         {
             return _context.FormaPagamento.ToList();
+        }
+
+        public FormaPagamentoModel ObterUmPagamento(int id)
+        {
+            return _context.FormaPagamento.SingleOrDefault(x => x.Id == id);
         }
     }
 }

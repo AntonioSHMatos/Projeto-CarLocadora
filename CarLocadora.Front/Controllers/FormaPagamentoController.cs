@@ -1,5 +1,6 @@
-﻿using CarLocadora.Front.ApiToken;
 using CarLocadora.Front.Models;
+using CarLocadora.Front.Servico;
+
 using CarLocadora.Models.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,10 +32,10 @@ namespace CarLocadora.Front.Controllers
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
-            
+
 
             HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}FormaPagamento").Result;
-            
+
             if (response.IsSuccessStatusCode)
             {
                 string conteudo = response.Content.ReadAsStringAsync().Result;
@@ -55,7 +56,7 @@ namespace CarLocadora.Front.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}FromaPagamento").Result;
+            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}FormaPagamento").Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -75,17 +76,27 @@ namespace CarLocadora.Front.Controllers
         }
 
         // POST: FormaPagamentoController/Create
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([FromForm] FormaPagamentoModel pagamento)
         {
-            try
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+
+
+            HttpResponseMessage response = client.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}FormaPagamento", pagamento).Result;
+
+            if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            else
             {
-                return View();
+                throw new Exception("LIGUE PARA O DEV!");
             }
         }
 
@@ -98,7 +109,7 @@ namespace CarLocadora.Front.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}FormaPagamemnto?id={id}").Result;
+            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}FormaPagamento/ObterUmPagamento?id={id}").Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -114,16 +125,40 @@ namespace CarLocadora.Front.Controllers
         // POST: FormaPagamentoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit([FromForm] FormaPagamentoModel pagamento)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+
+                    HttpClient client = new HttpClient();
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+
+                    HttpResponseMessage response = client.PutAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}FormaPagamento", pagamento).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        throw new Exception("LIGUE PARA O DEV!");
+                    }
+
+                }
+                else
+                {
+                    return View();
+                }
             }
             catch
             {
                 return View();
             }
+
         }
 
         // GET: FormaPagamentoController/Delete/5

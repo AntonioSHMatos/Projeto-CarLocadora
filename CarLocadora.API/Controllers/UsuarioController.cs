@@ -1,11 +1,13 @@
 ﻿using CarLocadora.Models.Models;
 using CarLocadora.Negocio.Usuario;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarLocadora.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioNegocio _usuario;
@@ -31,6 +33,10 @@ namespace CarLocadora.API.Controllers
         {
             return _usuario.ObterLista();
         }
-
+        [HttpGet("ObterUmUsuario")]
+        public UsuarioModel Get([FromQuery] string cpf)
+        {
+            return _usuario.ObterUmUsuario(cpf);
+        }
     }
 }

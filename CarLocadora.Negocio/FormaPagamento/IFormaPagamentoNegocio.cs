@@ -13,5 +13,7 @@ namespace CarLocadora.Negocio.FormaPagamento
         void Inserir(FormaPagamentoModel pagamento);
         List<FormaPagamentoModel> ObterLista();
 
+        FormaPagamentoModel ObterUmPagamento(int id);
+
     }
 }
