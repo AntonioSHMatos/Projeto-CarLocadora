@@ -155,9 +155,6 @@ namespace CarLocadora.infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CategoriaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ClienteCPF")
                         .IsRequired()
                         .HasMaxLength(14)
@@ -186,8 +183,6 @@ namespace CarLocadora.infra.Migrations
                         .HasColumnType("nvarchar(8)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoriaId");
 
                     b.HasIndex("ClienteCPF");
 
@@ -412,12 +407,6 @@ namespace CarLocadora.infra.Migrations
 
             modelBuilder.Entity("CarLocadora.Models.Models.LocacaoModel", b =>
                 {
-                    b.HasOne("CarLocadora.Models.Models.CategoriaModel", "Categoria")
-                        .WithMany()
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CarLocadora.Models.Models.ClienteModel", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteCPF")
@@ -433,8 +422,6 @@ namespace CarLocadora.infra.Migrations
                     b.HasOne("CarLocadora.Models.Models.VeiculoModel", "Veiculo")
                         .WithMany()
                         .HasForeignKey("VeiculoPlaca");
-
-                    b.Navigation("Categoria");
 
                     b.Navigation("Cliente");
 

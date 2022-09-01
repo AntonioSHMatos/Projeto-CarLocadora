@@ -3,7 +3,6 @@ C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\obj\Debu
 C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\obj\Debug\net6.0\CarLocadora.Front.AssemblyInfoInputs.cache
 C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\obj\Debug\net6.0\CarLocadora.Front.AssemblyInfo.cs
 C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\obj\Debug\net6.0\CarLocadora.Front.csproj.CoreCompileInputs.cache
-C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\obj\Debug\net6.0\CarLocadora.Front.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\obj\Debug\net6.0\CarLocadora.Front.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\obj\Debug\net6.0\CarLocadora.Front.RazorAssemblyInfo.cache
 C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\obj\Debug\net6.0\CarLocadora.Front.RazorAssemblyInfo.cs
@@ -246,6 +245,7 @@ C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\bin\Debu
 C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\bin\Debug\net6.0\CarLocadora.Models.dll
 C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\bin\Debug\net6.0\CarLocadora.Models.pdb
+C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\obj\Debug\net6.0\CarLocadora.Front.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\User\Desktop\CarLocadora\Projeto-CarLocadora\CarLocadora.Front\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css

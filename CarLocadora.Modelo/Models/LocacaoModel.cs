@@ -28,12 +28,7 @@ namespace CarLocadora.Models.Models
         public int FormaPagamentoId { get; set; }
         public FormaPagamentoModel? FormaPagamento { get; set; }
 
-
-        [Display(Name = "Categoria")]
-        [Required(ErrorMessage = "Categoria é Obrigatório")]
-        public int CategoriaId { get; set; }
-        public CategoriaModel? Categoria { get; set; }
-
+             
 
 
         [Display(Name = "Data/Hora Reserva")]

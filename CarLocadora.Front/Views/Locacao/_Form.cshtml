@@ -2,29 +2,24 @@
 
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-sm-3">
         <div class="form-group">
             <label asp-for="ClienteCPF" class="control-label"></label>
-            <input asp-for="ClienteCPF" class="form-control maskCPF" />
-            <span asp-validation-for="ClienteCPF" class="text-danger"></span>
+            <select asp-for="ClienteCPF" asp-items="ViewBag.Clientes" class="form-control text-uppercase">
+            <option disabled selected> </option>
+            </select>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-sm-3">
         <div class="form-group">
             <label asp-for="FormaPagamentoId" class="control-label"></label>
-            <input asp-for="FormaPagamentoId" class="form-control" />
-            <span asp-validation-for="FormaPagamentoId" class="text-danger"></span>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="form-group">
-            <label asp-for="CategoriaId" class="control-label"></label>
-            <input asp-for="CategoriaId" class="form-control" />
-            <span asp-validation-for="CategoriaId" class="text-danger"></span>
+            <select asp-for="FormaPagamentoId" asp-items="ViewBag.FormasDePagamentos" class="form-control text-uppercase">
+            <option disabled selected> </option>
+            </select>
         </div>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-md-3">
@@ -42,11 +37,12 @@
         </div>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-sm-3">
         <div class="form-group">
             <label asp-for="VeiculoPlaca" class="control-label"></label>
-            <input asp-for="VeiculoPlaca" class="form-control maskPlaca" />
-            <span asp-validation-for="VeiculoPlaca" class="text-danger"></span>
+            <select asp-for="VeiculoPlaca" asp-items="ViewBag.Veiculos" class="form-control text-uppercase">
+            <option disabled selected> </option>
+            </select>
         </div>
     </div>
 </div>

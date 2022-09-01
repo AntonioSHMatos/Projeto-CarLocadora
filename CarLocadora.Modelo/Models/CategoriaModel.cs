@@ -15,17 +15,17 @@ namespace CarLocadora.Models.Models
         [Required(ErrorMessage = "Campo é Obrigatório")]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Campo é Obrigatório")]
-        [StringLength(100, ErrorMessage = "Campo Maximo de 100 Caracteres")]
+        [Required(ErrorMessage = "Descrição é Obrigatório")]
+        [StringLength(100, ErrorMessage = "Descrição Maximo de 100 Caracteres")]
         public string Descricao { get; set; }
 
-        [Required(ErrorMessage = "Campo é Obrigatório")]
+        [Required(ErrorMessage = "Valor é Obrigatório")]
         public decimal ValorDiario  { get; set; }
 
-        [Required(ErrorMessage = "Campo é Obrigatório")]
+        [Required(ErrorMessage = "Valor é Obrigatório")]
         public bool Ativo { get; set; }
 
-        [Required(ErrorMessage = "Campo é Obrigatório")]
+        [Required(ErrorMessage = "Valor é Obrigatório")]
         public DateTime DataInclusao { get; set; }
 
         public DateTime? DataAlteracao { get; set; }

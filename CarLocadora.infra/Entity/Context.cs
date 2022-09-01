@@ -6,7 +6,7 @@ namespace CarLocadora.Entity
     {
         public Context(DbContextOptions<Context> options) : base(options)
         {
-            //options.Configuration.LazyLoadingEnabled = false;
+            
         }
 
 

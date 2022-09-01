@@ -2,6 +2,7 @@
 using CarLocadora.Front.Servico;
 using CarLocadora.Models.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -52,6 +53,8 @@ namespace CarLocadora.Front.Controllers
 
         public ActionResult Create()
         {
+
+            ViewBag.Locacoes = CarregarLocacoes().Result;
             return View();
         }
 
@@ -142,8 +145,39 @@ namespace CarLocadora.Front.Controllers
                 return View();
             }
         }
-               
 
+        private async Task<List<SelectListItem>> CarregarLocacoes()
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",  _apiToken.Obter());
+
+            HttpResponseMessage response = await client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Locacao");
+
+            if (response.IsSuccessStatusCode)
+            {
+                List<LocacaoModel> locacoes = JsonConvert.DeserializeObject<List<LocacaoModel>>( response.Content.ReadAsStringAsync().Result);
+
+                foreach (var linha in locacoes)
+                {
+                    lista.Add(new SelectListItem()
+                    {
+                        Value = linha.Id.ToString(),
+                        Text = linha.VeiculoPlaca + " - " + linha.ClienteCPF,
+                        Selected = false,
+                    });
+                }
+
+                return lista;
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+        }
     }
 }
 

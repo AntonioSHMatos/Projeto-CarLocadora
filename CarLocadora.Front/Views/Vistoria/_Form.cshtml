@@ -2,11 +2,14 @@
 
 
 <div class="row">
-    <div class="col-md-3">
-        <div class="form-group">
-            <label asp-for="LocacaoId" class="control-label"></label>
-            <input asp-for="LocacaoId" class="form-control" />
-            <span asp-validation-for="LocacaoId" class="text-danger"></span>
+    <div class="row mb-3">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label asp-for="LocacaoId" class="control-label"></label>
+                <select asp-for="LocacaoId" asp-items="ViewBag.Locacoes" class="form-control text-uppercase">
+                    <option disabled selected> </option>
+                </select>
+            </div>
         </div>
     </div>
 
@@ -26,16 +29,11 @@
             <span asp-validation-for="CombustivelSaida" class="text-danger"></span>
         </div>
     </div>
-</div>
-
-<div class="row">
     <div class="col-md-3">
         <div class="form-group">
-            <div class="form-group">
-                <label asp-for="ObservacaoSaida" class="control-label"></label>
-                <input asp-for="ObservacaoSaida" class="form-control" />
-                <span asp-validation-for="ObservacaoSaida" class="text-danger"></span>
-            </div>
+            <label asp-for="KmEntrada" class="control-label"></label>
+            <input asp-for="KmEntrada" class="form-control" />
+            <span asp-validation-for="KmEntrada" class="text-danger"></span>
         </div>
     </div>
     <div class="col-md-3">
@@ -45,14 +43,21 @@
             <span asp-validation-for="DataHoraRetiradaPatio" class="text-danger"></span>
         </div>
     </div>
+</div>
 
-    <div class="col-md-3">
+<div class="row">
+
+    <div class="col-md-12">
         <div class="form-group">
-            <label asp-for="KmEntrada" class="control-label"></label>
-            <input asp-for="KmEntrada" class="form-control" />
-            <span asp-validation-for="KmEntrada" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="ObservacaoSaida" class="control-label"></label>
+                <textarea placeholder="Informe Algum Valor Necessario para Saida do Veiculo" srows="4" asp-for="ObservacaoSaida" class="form-control"></textarea>
+                <span asp-validation-for="ObservacaoSaida" class="text-danger"></span>
+            </div>
         </div>
     </div>
+
+
 </div>
 
 
@@ -64,18 +69,22 @@
             <span asp-validation-for="CombustivelEntrada" class="text-danger"></span>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="form-group">
-            <label asp-for="ObservacaoEntrada" class="control-label"></label>
-            <input asp-for="ObservacaoEntrada" class="form-control" />
-            <span asp-validation-for="ObservacaoEntrada" class="text-danger"></span>
-        </div>
-    </div>
+
     <div class="col-md-3">
         <div class="form-group">
             <label asp-for="DataHoraDevolucaoPatio" class="control-label"></label>
             <input asp-for="DataHoraDevolucaoPatio" class="form-control" />
             <span asp-validation-for="DataHoraDevolucaoPatio" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label asp-for="ObservacaoEntrada" class="control-label"></label>
+            <textarea placeholder="Informe Algum Valor Necessario para Entrada do Veiculo" srows="4" asp-for="ObservacaoEntrada" class="form-control"></textarea>
+            <span asp-validation-for="ObservacaoEntrada" class="text-danger"></span>
         </div>
     </div>
 
