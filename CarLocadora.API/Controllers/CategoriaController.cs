@@ -19,35 +19,35 @@ namespace CarLocadora.API.Controllers
         }
         
         [HttpDelete()]
-        public void Deletar([FromQuery]int Id)
+        public async Task Deletar([FromQuery]int Id)
         {
-            _categoriaNegocio.Excluir(Id);
+           await  _categoriaNegocio.Excluir(Id);
         }
 
         [HttpGet]
-        public List<CategoriaModel> Get()
+        public async Task<List<CategoriaModel>> Get()
         {
-            return _categoriaNegocio.ObterLista();
+            return await _categoriaNegocio.ObterLista();
         }
 
 
         [HttpPost()]
-        public void Post([FromBody] CategoriaModel categoriaNegocio)
+        public async Task Post([FromBody] CategoriaModel categoriaNegocio)
         {
-            _categoriaNegocio.Inserir(categoriaNegocio);
+            await _categoriaNegocio.Inserir(categoriaNegocio);
 
         }
         [HttpPut()]
-        public void Put([FromBody] CategoriaModel categoriaNegocio)
+        public async Task Put([FromBody] CategoriaModel categoriaNegocio)
         {
             _categoriaNegocio.Alterar(categoriaNegocio);
 
         }
 
         [HttpGet("ObterDadosCategoria")]
-        public CategoriaModel Get([FromQuery] int id)
+        public async Task<CategoriaModel> Get([FromQuery] int id)
         {
-            return _categoriaNegocio.ObterUmaCategoria(id);
+            return await _categoriaNegocio.ObterUmaCategoria(id);
         }
 
 

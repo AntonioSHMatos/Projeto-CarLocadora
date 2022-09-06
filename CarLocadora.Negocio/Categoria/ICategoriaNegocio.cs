@@ -9,11 +9,11 @@ namespace CarLocadora.Negocio.Categoria
 {
     public interface ICategoriaNegocio
     {
-        void Excluir(int Id);
-        List<CategoriaModel> ObterLista();
+        Task Excluir(int Id);
+        Task<List<CategoriaModel>> ObterLista();
                
-        void Alterar(CategoriaModel categoria);
-        void Inserir(CategoriaModel categoria);
-        CategoriaModel ObterUmaCategoria(int id);
+        Task Alterar(CategoriaModel categoria);
+        Task  Inserir(CategoriaModel categoria);
+        Task<CategoriaModel> ObterUmaCategoria(int id);
     }
 }

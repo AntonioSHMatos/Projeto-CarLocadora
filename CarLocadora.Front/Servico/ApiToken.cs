@@ -18,7 +18,7 @@ namespace CarLocadora.Front.Servico
             _loginRespostaModel = loginRespostaModel;
         }
 
-        private void ObterToken()
+        private async Task  ObterToken()
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
@@ -30,7 +30,7 @@ namespace CarLocadora.Front.Servico
 
 
 
-            HttpResponseMessage response = client.PostAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}Login", loginRequisacaoModel).Result;
+            HttpResponseMessage response = await client.PostAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}Login", loginRequisacaoModel);
 
             if (response.IsSuccessStatusCode)
             {
@@ -51,17 +51,17 @@ namespace CarLocadora.Front.Servico
                 throw new Exception("LIGUE P/ O DEV!");
             }
         }
-        public string Obter()
+        public async Task<string> Obter()
         {
             if (_loginRespostaModel.Value.Autenticado == false)
             {
-                ObterToken();
+                await ObterToken();
             }
             else
             {
                 if (DateTime.Now >= _loginRespostaModel.Value.DataExpiracao)
                 {
-                    ObterToken();
+                    await ObterToken();
                 }
             }
             return _loginRespostaModel.Value.Token;

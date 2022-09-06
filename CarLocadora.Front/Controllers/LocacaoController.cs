@@ -21,7 +21,7 @@ namespace CarLocadora.Front.Controllers
             _apiToken = apiToken;
         }
 
-        public ActionResult Index(string mensagem = null, bool sucesso = true)
+        public async Task<ActionResult> Index(string mensagem = null, bool sucesso = true)
         {
             if (sucesso)
                 TempData["sucesso"] = mensagem;
@@ -31,14 +31,14 @@ namespace CarLocadora.Front.Controllers
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Locacao").Result;
+            HttpResponseMessage response = await client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Locacao");
 
             if (response.IsSuccessStatusCode)
             {
-                string conteudo = response.Content.ReadAsStringAsync().Result;
+                string conteudo = await response.Content.ReadAsStringAsync();
                 return View(JsonConvert.DeserializeObject<List<LocacaoModel>>(conteudo));
             }
             else
@@ -54,7 +54,7 @@ namespace CarLocadora.Front.Controllers
 
             ViewBag.Veiculos = CarregarVeiculos().Result;
             ViewBag.Clientes = CarregarClientes().Result;
-            ViewBag.FormasDePagamentos = CarregarFormasDePagamento().Result;
+            ViewBag.FormasDePagamentos = await CarregarFormasDePagamento();
 
             return View();
         }
@@ -63,15 +63,15 @@ namespace CarLocadora.Front.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([FromForm] LocacaoModel locacao)
+        public async Task<ActionResult> Create([FromForm] LocacaoModel locacao)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Locacao", locacao).Result;
+            HttpResponseMessage response = await client.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Locacao", locacao);
 
             if (response.IsSuccessStatusCode)
             {
@@ -84,24 +84,24 @@ namespace CarLocadora.Front.Controllers
         }
 
 
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",await  _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Locacao/ObterUmaLocacao?id={id}").Result;
+            HttpResponseMessage response = await client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Locacao/ObterUmaLocacao?id={id}");
 
             if (response.IsSuccessStatusCode)
             {
 
 
-                ViewBag.Veiculos = CarregarVeiculos().Result;
-                ViewBag.Clientes = CarregarClientes().Result;
-                ViewBag.FormasDePagamentos = CarregarFormasDePagamento().Result;
+                ViewBag.Veiculos = await CarregarVeiculos();
+                ViewBag.Clientes = await CarregarClientes();
+                ViewBag.FormasDePagamentos = await CarregarFormasDePagamento();
 
                 string conteudo = response.Content.ReadAsStringAsync().Result;
 
@@ -120,7 +120,7 @@ namespace CarLocadora.Front.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([FromForm] LocacaoModel locacao)
+        public async Task<ActionResult> Edit([FromForm] LocacaoModel locacao)
         {
             try
             {
@@ -131,9 +131,9 @@ namespace CarLocadora.Front.Controllers
                     HttpClient client = new HttpClient();
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
-                    HttpResponseMessage response = client.PutAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Locacao", locacao).Result;
+                    HttpResponseMessage response = await client.PutAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Locacao", locacao);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -162,7 +162,7 @@ namespace CarLocadora.Front.Controllers
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
             HttpResponseMessage response = await client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Veiculo");
 
@@ -195,7 +195,7 @@ namespace CarLocadora.Front.Controllers
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",  _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",  await _apiToken.Obter());
 
             HttpResponseMessage response = await client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Cliente");
 
@@ -228,7 +228,7 @@ namespace CarLocadora.Front.Controllers
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
             HttpResponseMessage response = await client.GetAsync($"{_dadosbase.Value.API_URL_BASE}FormaPagamento");
 

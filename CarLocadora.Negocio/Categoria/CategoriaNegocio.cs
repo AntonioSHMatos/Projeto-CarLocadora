@@ -1,5 +1,6 @@
 ﻿using CarLocadora.Entity;
 using CarLocadora.Models.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,38 +19,38 @@ namespace CarLocadora.Negocio.Categoria
             _context = context;
         }
 
-        public void Alterar(CategoriaModel categoria)
+        public async Task Alterar(CategoriaModel categoria)
         {
             categoria.DataAlteracao = DateTime.Now;
             _context.Update(categoria);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             
         }
 
-        public void Excluir(int Id)
+        public async Task Excluir(int Id)
         {
             CategoriaModel categoria =  _context.Categoria.SingleOrDefault(x => x.Id == Id);
-            _context.Categoria.Remove(categoria);
-            _context.SaveChanges();
+             _context.Categoria.Remove(categoria);
+            await _context.SaveChangesAsync();
         }
 
-        public void Inserir(CategoriaModel categoria)
+        public async Task Inserir(CategoriaModel categoria)
         {
             categoria.DataInclusao = DateTime.Now;
-            _context.AddAsync(categoria);
-           _context.SaveChanges();
+           await  _context.AddAsync(categoria);
+           await _context.SaveChangesAsync();
         }
 
-        public List<CategoriaModel> ObterLista()
+        public async Task<List<CategoriaModel>> ObterLista()
         {
-            return _context.Categoria.ToList();
+            return await _context.Categoria.ToListAsync();
         }
         
 
-        public CategoriaModel ObterUmaCategoria(int id)
+        public async Task<CategoriaModel> ObterUmaCategoria(int id)
         {
-            return _context.Categoria.SingleOrDefault(x => x.Id == id);
+            return await _context.Categoria.SingleOrDefaultAsync(x => x.Id == id);
         }
     }
 }

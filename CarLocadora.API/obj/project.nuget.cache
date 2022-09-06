@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FWJRYJjHrmW0yltfgEqOflRqsCbCViWAhy1SRbVWZxScycxD4A7ijpgSnvI0vEk5unJzhleBdC/XO+ocZKfstw==",
+  "dgSpecHash": "/RmP638FUMtGIcNcRxYgVJhpWC/TdfHyPZ3drQWdwO1JD6YItn5Bw04j0+r1+o6vGNyn+UEwro7CUZ1JYh1oEg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\User\\Desktop\\CarLocadora\\Projeto-CarLocadora\\CarLocadora.API\\CarLocadora.API.csproj",
+  "projectFilePath": "C:\\Users\\User\\Source\\Repos\\Projeto-CarLocadora\\CarLocadora.API\\CarLocadora.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.8\\microsoft.aspnetcore.authentication.jwtbearer.6.0.8.nupkg.sha512",

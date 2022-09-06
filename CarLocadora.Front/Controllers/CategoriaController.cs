@@ -22,7 +22,7 @@ namespace CarLocadora.Front.Controllers
             _apiToken = apiToken;
         }
         // GET: CategoriaController
-        public ActionResult Index(string mensagem = null, bool sucesso = true)
+        public async Task<IActionResult> Index(string mensagem = null, bool sucesso = true)
         {
             if (sucesso)
                 TempData["sucesso"] = mensagem;
@@ -32,14 +32,14 @@ namespace CarLocadora.Front.Controllers
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria").Result;
+            HttpResponseMessage response = await client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria");
 
             if (response.IsSuccessStatusCode)
             {
-                string conteudo = response.Content.ReadAsStringAsync().Result;
+                string conteudo = await response.Content.ReadAsStringAsync();
                 return View(JsonConvert.DeserializeObject<List<CategoriaModel>>(conteudo));
             }
             else
@@ -60,15 +60,15 @@ namespace CarLocadora.Front.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([FromForm] CategoriaModel categoria)
+        public async Task<IActionResult> Create([FromForm] CategoriaModel categoria)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",await  _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Categoria", categoria).Result;
+            HttpResponseMessage response = await client.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Categoria", categoria);
 
             if (response.IsSuccessStatusCode)
             {
@@ -81,19 +81,19 @@ namespace CarLocadora.Front.Controllers
         }
 
         // GET: CategoriaController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria/ObterDadosCategoria?id={id}").Result;
+            HttpResponseMessage response = await  client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria/ObterDadosCategoria?id={id}");
 
             if (response.IsSuccessStatusCode)
             {
-                string conteudo = response.Content.ReadAsStringAsync().Result;
+                string conteudo = await response.Content.ReadAsStringAsync();
                 return View(JsonConvert.DeserializeObject<CategoriaModel>(conteudo));
             }
             else
@@ -109,7 +109,7 @@ namespace CarLocadora.Front.Controllers
         // POST: CategoriaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([FromForm] CategoriaModel categoria)
+        public async Task<IActionResult> Edit([FromForm] CategoriaModel categoria)
         {
             try
             {
@@ -120,9 +120,9 @@ namespace CarLocadora.Front.Controllers
                     HttpClient client = new HttpClient();
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
-                    HttpResponseMessage response = client.PutAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Categoria", categoria).Result;
+                    HttpResponseMessage response = await client.PutAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Categoria", categoria);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -145,13 +145,13 @@ namespace CarLocadora.Front.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
-            HttpResponseMessage response = client.DeleteAsync($"{_dadosbase.Value.API_URL_BASE}Categoria?id={id}").Result;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+            HttpResponseMessage response = await client.DeleteAsync($"{_dadosbase.Value.API_URL_BASE}Categoria?id={id}");
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index), new { mensagem = "Registro excluído!", sucesso = true });

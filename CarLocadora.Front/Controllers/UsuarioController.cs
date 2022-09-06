@@ -18,7 +18,7 @@ namespace CarLocadora.Front.Controllers
             _apiToken = apiToken;
         }
         // GET: UsuarioController
-        public ActionResult Index(string mensagem = null, bool sucesso = true)
+        public async Task<ActionResult> Index(string mensagem = null, bool sucesso = true)
         {
             if (sucesso)
                 TempData["sucesso"] = mensagem;
@@ -28,7 +28,7 @@ namespace CarLocadora.Front.Controllers
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
             HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Usuario").Result;
@@ -56,17 +56,17 @@ namespace CarLocadora.Front.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([FromForm] UsuarioModel usuario)
+        public async Task<ActionResult> Create([FromForm] UsuarioModel usuario)
         {
             if (ModelState.IsValid)
             {
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-                HttpResponseMessage response = client.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Usuario", usuario).Result;
+                HttpResponseMessage response = await client.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Usuario", usuario);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -82,7 +82,7 @@ namespace CarLocadora.Front.Controllers
         }
 
         // GET: UsuarioController/Edit/5
-        public ActionResult Edit(string cpf)
+        public async Task<ActionResult> Edit(string cpf)
         {
             if (ModelState.IsValid)
             {
@@ -90,14 +90,14 @@ namespace CarLocadora.Front.Controllers
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-                HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Usuario/ObterUmUsuario?cpf={cpf}").Result;
+                HttpResponseMessage response = await client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Usuario/ObterUmUsuario?cpf={cpf}");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    string conteudo = response.Content.ReadAsStringAsync().Result;
+                    string conteudo = await response.Content.ReadAsStringAsync();
                     return View(JsonConvert.DeserializeObject<UsuarioModel>(conteudo));
                 }
                 else
@@ -111,7 +111,7 @@ namespace CarLocadora.Front.Controllers
         // POST: UsuarioController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([FromForm] UsuarioModel usuario)
+        public async Task<ActionResult> Edit([FromForm] UsuarioModel usuario)
         {
             try
             {
@@ -121,9 +121,9 @@ namespace CarLocadora.Front.Controllers
                     HttpClient client = new HttpClient();
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
-                    HttpResponseMessage response = client.PutAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Usuario", usuario).Result;
+                    HttpResponseMessage response = await client.PutAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Usuario", usuario);
 
                     if (response.IsSuccessStatusCode)
                     {

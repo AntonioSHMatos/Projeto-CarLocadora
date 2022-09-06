@@ -22,19 +22,19 @@ namespace CarLocadora.Front.Controllers
 
 
 
-        public IActionResult Index()
+        public async Task<ActionResult> Index()
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.GetAsync($"{_dadosBase.Value.API_URL_BASE}ManutencaoVeiculo").Result;
+            HttpResponseMessage response = await client.GetAsync($"{_dadosBase.Value.API_URL_BASE}ManutencaoVeiculo");
 
             if (response.IsSuccessStatusCode)
             {
-                string conteudo = response.Content.ReadAsStringAsync().Result;
+                string conteudo = await  response.Content.ReadAsStringAsync();
                 return View(JsonConvert.DeserializeObject<List<ManutencaoVeiculoModel>>(conteudo));
             }
             else
@@ -54,7 +54,7 @@ namespace CarLocadora.Front.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([FromForm] ManutencaoVeiculoModel manutencao)
+        public async Task<ActionResult> Create([FromForm] ManutencaoVeiculoModel manutencao)
         {
 
             try
@@ -64,10 +64,10 @@ namespace CarLocadora.Front.Controllers
                     HttpClient client = new HttpClient();
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",await  _apiToken.Obter());
 
 
-                    HttpResponseMessage response = client.PostAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}ManutencaoVeiculo", manutencao).Result;
+                    HttpResponseMessage response = await client.PostAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}ManutencaoVeiculo", manutencao);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -92,21 +92,21 @@ namespace CarLocadora.Front.Controllers
 
 
         // GET: VeiculoController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.GetAsync($"{_dadosBase.Value.API_URL_BASE}ManutencaoVeiculo/ObterUmaManutencao?id={id}").Result;
+            HttpResponseMessage response = await client.GetAsync($"{_dadosBase.Value.API_URL_BASE}ManutencaoVeiculo/ObterUmaManutencao?id={id}");
 
             if (response.IsSuccessStatusCode)
             {
-                ViewBag.Veiculos = CarregarVeiculos().Result;
+                ViewBag.Veiculos = await CarregarVeiculos();
 
-                string conteudo = response.Content.ReadAsStringAsync().Result;
+                string conteudo = await response.Content.ReadAsStringAsync();
                 return View(JsonConvert.DeserializeObject<ManutencaoVeiculoModel>(conteudo));
             }
             else
@@ -118,7 +118,7 @@ namespace CarLocadora.Front.Controllers
         // POST: VeiculoController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([FromForm] ManutencaoVeiculoModel manutencaoVeiculo)
+        public async Task<ActionResult> Edit([FromForm] ManutencaoVeiculoModel manutencaoVeiculo)
         {
             try
             {
@@ -128,9 +128,9 @@ namespace CarLocadora.Front.Controllers
                     HttpClient client = new HttpClient();
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
-                    HttpResponseMessage response = client.PutAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}ManutencaoVeiculo", manutencaoVeiculo).Result;
+                    HttpResponseMessage response = await client.PutAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}ManutencaoVeiculo", manutencaoVeiculo);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -156,13 +156,13 @@ namespace CarLocadora.Front.Controllers
 
 
 
-        public ActionResult Delete(int id)
+        public  async Task<ActionResult> Delete(int id)
         {
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
-            HttpResponseMessage response = client.DeleteAsync($"{_dadosBase.Value.API_URL_BASE}ManutencaoVeiculo?id={id}").Result;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+            HttpResponseMessage response = await client.DeleteAsync($"{_dadosBase.Value.API_URL_BASE}ManutencaoVeiculo?id={id}");
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index), new { mensagem = "Registro excluído!", sucesso = true });
@@ -182,7 +182,7 @@ namespace CarLocadora.Front.Controllers
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiToken.Obter());
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
             HttpResponseMessage response = client.GetAsync($"{_dadosBase.Value.API_URL_BASE}Veiculo").Result;
 
