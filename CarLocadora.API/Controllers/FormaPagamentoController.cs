@@ -18,28 +18,28 @@ namespace CarLocadora.API.Controllers
         }
 
         [HttpPost()]
-        public void Post([FromBody] FormaPagamentoModel pagamento)
+        public async Task Post([FromBody] FormaPagamentoModel pagamento)
         {
-            _pagamento.Inserir(pagamento);
+            await _pagamento.Inserir(pagamento);
 
         }
         [HttpPut()]
-        public void Put([FromBody] FormaPagamentoModel pagamento)
+        public async Task Put([FromBody] FormaPagamentoModel pagamento)
         {
-            _pagamento.Alterar(pagamento);
+            await _pagamento.Alterar(pagamento);
 
         }
 
         [HttpGet()]
-        public List<FormaPagamentoModel> Get()
+        public async Task<List<FormaPagamentoModel>> Get()
         {
-            return _pagamento.ObterLista();
+            return await _pagamento.ObterLista();
         }
 
         [HttpGet("ObterUmPagamento")]
-        public FormaPagamentoModel Get([FromQuery] int id)
+        public async Task<FormaPagamentoModel> Get([FromQuery] int id)
         {
-            return _pagamento.ObterUmPagamento(id);
+            return await _pagamento.ObterUmPagamento(id);
         }
 
     }

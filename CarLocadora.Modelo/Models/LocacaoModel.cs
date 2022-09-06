@@ -43,7 +43,7 @@ namespace CarLocadora.Models.Models
         [Required(ErrorMessage = "Data Hora Devolução é Obrigatório")]
         public DateTime DataHoraDevolucaoPrevista { get; set; }
 
-        [Display(Name = "Placa")]
+        [Display(Name = "Veiculo")]
         [StringLength(8, ErrorMessage = "Maximo de 8 Caracteres")]
         public string? VeiculoPlaca { get; set; }
         public VeiculoModel? Veiculo { get; set; }

@@ -1,5 +1,6 @@
 ﻿using CarLocadora.Entity;
 using CarLocadora.Models.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarLocadora.Negocio.FormaPagamento
 {
@@ -12,33 +13,33 @@ namespace CarLocadora.Negocio.FormaPagamento
         }
         
 
-        public void Alterar(FormaPagamentoModel pagamento)
+        public async Task Alterar(FormaPagamentoModel pagamento)
         {
             pagamento.DataAlteracao = DateTime.Now;
             _context.Update(pagamento);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
            
 
         }
 
-        public void Inserir(FormaPagamentoModel pagamento)
+        public async Task Inserir(FormaPagamentoModel pagamento)
         {
             pagamento.DataInclusao = DateTime.Now;
-            _context.AddAsync(pagamento);
-            _context.SaveChanges();
+            await _context.AddAsync(pagamento);
+            await _context.SaveChangesAsync();
 
 
         }
 
-        public List<FormaPagamentoModel> ObterLista()
+        public async Task <List<FormaPagamentoModel>> ObterLista()
         {
-            return _context.FormaPagamento.ToList();
+            return await _context.FormaPagamento.ToListAsync();
         }
 
-        public FormaPagamentoModel ObterUmPagamento(int id)
+        public async Task<FormaPagamentoModel> ObterUmPagamento(int id)
         {
-            return _context.FormaPagamento.SingleOrDefault(x => x.Id == id);
+            return await _context.FormaPagamento.SingleOrDefaultAsync(x => x.Id == id);
         }
     }
 }

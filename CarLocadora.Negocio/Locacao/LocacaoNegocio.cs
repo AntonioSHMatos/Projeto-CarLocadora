@@ -1,5 +1,6 @@
 ﻿using CarLocadora.Entity;
 using CarLocadora.Models.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,27 +17,27 @@ namespace CarLocadora.Negocio.Locacao
         {
             _context = context;
         }
-        public void Alterar(LocacaoModel locacao)
+        public async Task Alterar(LocacaoModel locacao)
         {
             locacao.DataAlteracao = DateTime.Now;
             _context.Update(locacao);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Inserir(LocacaoModel locacao)
+        public async Task Inserir(LocacaoModel locacao)
         {
             locacao.DataInclusao = DateTime.Now;
-            _context.Add(locacao);
-            _context.SaveChanges();
+            await _context.AddAsync(locacao);
+            await _context.SaveChangesAsync();
         }
 
-        public List<LocacaoModel> ObterLista()
+        public async Task<List<LocacaoModel>> ObterLista()
         {
-            return _context.LocacaoVeiculos.ToList();
+            return await _context.LocacaoVeiculos.ToListAsync();
         }
-        public LocacaoModel ObterUmaLocacao(int id)
+        public async Task<LocacaoModel> ObterUmaLocacao(int id)
         {
-            return _context.LocacaoVeiculos.SingleOrDefault(x => x.Id == id);
+            return await _context.LocacaoVeiculos.SingleOrDefaultAsync(x => x.Id == id);
         }
     }
 

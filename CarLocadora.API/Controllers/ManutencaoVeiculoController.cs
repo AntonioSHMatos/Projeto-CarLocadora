@@ -18,32 +18,32 @@ namespace CarLocadora.API.Controllers
         }
 
         [HttpPost()]
-        public void Post([FromBody] ManutencaoVeiculoModel veiculo)
+        public async Task Post([FromBody] ManutencaoVeiculoModel veiculo)
         {
-            _veiculo.Inserir(veiculo);
+            await _veiculo.Inserir(veiculo);
 
         }
         [HttpPut()]
-        public void Put([FromBody] ManutencaoVeiculoModel veiculo)
+        public async Task Put([FromBody] ManutencaoVeiculoModel veiculo)
         {
-            _veiculo.Alterar(veiculo);
+            await _veiculo.Alterar(veiculo);
 
         }
         [HttpGet()]
-        public List<ManutencaoVeiculoModel> Get()
+        public async Task<List<ManutencaoVeiculoModel>> Get()
         {
-            return _veiculo.ObterLista();
+            return await  _veiculo.ObterLista();
         }
         [HttpGet("ObterUmaManutencao")]
-        public ManutencaoVeiculoModel Get([FromQuery] int id)
+        public async Task<ManutencaoVeiculoModel> Get([FromQuery] int id)
         {
-            return _veiculo.ObterUmaManutencao(id);
+            return await _veiculo.ObterUmaManutencao(id);
         }
 
         [HttpDelete()]
-        public void Deletar([FromQuery] int Id)
+        public async Task Deletar([FromQuery] int Id)
         {
-            _veiculo.Excluir(Id);
+            await _veiculo.Excluir(Id);
         }
     }
 }

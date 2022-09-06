@@ -1,5 +1,6 @@
 ﻿using CarLocadora.Entity;
 using CarLocadora.Models.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,36 +17,36 @@ namespace CarLocadora.Negocio.ManutencaoVeiculo
         {
             _context = context;
         }
-        public void Alterar(ManutencaoVeiculoModel manutencaoVeiculo)
+        public async Task Alterar(ManutencaoVeiculoModel manutencaoVeiculo)
         {
             manutencaoVeiculo.DataAlteracao = DateTime.Now;
             _context.Update(manutencaoVeiculo);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Excluir(int Id)
+        public async Task Excluir(int Id)
         {
-            ManutencaoVeiculoModel manutencaoVeiculo = _context.ManutencaoVeiculos.SingleOrDefault(x => x.Id == Id);
+            ManutencaoVeiculoModel manutencaoVeiculo = await _context.ManutencaoVeiculos.SingleOrDefaultAsync(x => x.Id == Id);
             _context.ManutencaoVeiculos.Remove(manutencaoVeiculo);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Inserir(ManutencaoVeiculoModel manutencaoVeiculo)
+        public async Task Inserir(ManutencaoVeiculoModel manutencaoVeiculo)
         {
             manutencaoVeiculo.DataInclusao = DateTime.Now;
-            _context.Add(manutencaoVeiculo);
-            _context.SaveChanges();
+            await _context.AddAsync(manutencaoVeiculo);
+           await  _context.SaveChangesAsync();
         }
 
-        public List<ManutencaoVeiculoModel> ObterLista()
+        public async Task<List<ManutencaoVeiculoModel>> ObterLista()
         {
-            return _context.ManutencaoVeiculos.ToList();
+            return await _context.ManutencaoVeiculos.ToListAsync();
 
         }
 
-        public ManutencaoVeiculoModel ObterUmaManutencao(int id)
+        public async Task<ManutencaoVeiculoModel> ObterUmaManutencao(int id)
         {
-            return _context.ManutencaoVeiculos.SingleOrDefault(x => x.Id == id);
+            return await _context.ManutencaoVeiculos.SingleOrDefaultAsync(x => x.Id == id);
         }
     }
 }

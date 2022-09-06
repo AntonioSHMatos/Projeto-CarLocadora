@@ -9,11 +9,11 @@ namespace CarLocadora.Negocio.Usuario
 {
     public interface IUsuarioNegocio
     {
-        void Alterar(UsuarioModel usuario);
-        void Inserir(UsuarioModel usuario);
+        Task Alterar(UsuarioModel usuario);
+        Task Inserir(UsuarioModel usuario);
 
-        List<UsuarioModel> ObterLista();
+        Task<List<UsuarioModel>> ObterLista();
 
-        UsuarioModel ObterUmUsuario(string CPF);
+        Task<UsuarioModel> ObterUmUsuario(string CPF);
     }
 }

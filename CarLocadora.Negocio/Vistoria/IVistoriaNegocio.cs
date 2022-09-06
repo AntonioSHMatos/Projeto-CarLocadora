@@ -9,11 +9,11 @@ namespace CarLocadora.Negocio.Vistoria
 {
     public interface IVistoriaNegocio
     {
-        List<VistoriaModel> ObterLista();
+        Task<List<VistoriaModel>> ObterLista();
 
-        void Alterar(VistoriaModel vistoria);
-        void Inserir(VistoriaModel vistoria);
+        Task Alterar(VistoriaModel vistoria);
+        Task Inserir(VistoriaModel vistoria);
 
-        VistoriaModel ObterUmaVistoria(int id);
+        Task<VistoriaModel> ObterUmaVistoria(int id);
     }
 }

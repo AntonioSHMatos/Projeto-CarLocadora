@@ -19,28 +19,28 @@ namespace CarLocadora.API.Controllers
         }
 
         [HttpGet]
-        public List<VistoriaModel> Get()
+        public async Task <List<VistoriaModel>> Get()
         {
-            return _vistoriaNegocio.ObterLista();
+            return await _vistoriaNegocio.ObterLista();
         }
 
 
         [HttpPost()]
-        public void Post([FromBody] VistoriaModel vistoria)
+        public async Task Post([FromBody] VistoriaModel vistoria)
         {
-            _vistoriaNegocio.Inserir(vistoria);
+            await _vistoriaNegocio.Inserir(vistoria);
 
         }
         [HttpPut()]
-        public void Put([FromBody] VistoriaModel vistoria)
+        public async Task Put([FromBody] VistoriaModel vistoria)
         {
-            _vistoriaNegocio.Alterar(vistoria);
+            await _vistoriaNegocio.Alterar(vistoria);
 
         }
         [HttpGet("ObterUmaVistoria")]
-        public VistoriaModel Get([FromQuery] int id)
+        public async Task<VistoriaModel> Get([FromQuery] int id)
         {
-            return _vistoriaNegocio.ObterUmaVistoria(id);
+            return await _vistoriaNegocio.ObterUmaVistoria(id);
         }
     }
 }

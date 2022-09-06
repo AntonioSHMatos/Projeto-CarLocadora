@@ -9,11 +9,11 @@ namespace CarLocadora.Negocio.VeiculoNegocio.cs
 {
     public interface IVeiculoNegocio
     {
-        void Alterar(VeiculoModel veiculo);
-        void Inserir(VeiculoModel veiculo);
+        Task Alterar(VeiculoModel veiculo);
+        Task Inserir(VeiculoModel veiculo);
 
-        List<VeiculoModel> ObterLista();
+        Task<List<VeiculoModel>> ObterLista();
 
-        VeiculoModel ObterUmVeiculo(string placa);
+        Task<VeiculoModel> ObterUmVeiculo(string placa);
     }
 }

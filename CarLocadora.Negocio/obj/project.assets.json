@@ -1959,11 +1959,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\Projeto-CarLocadora\\CarLocadora.Negocio\\CarLocadora.Negocio.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\aulas daniel\\CAR-LOCADORA\\CarLocadora.Negocio\\CarLocadora.Negocio.csproj",
       "projectName": "CarLocadora.Negocio",
-      "projectPath": "C:\\Users\\User\\Source\\Repos\\Projeto-CarLocadora\\CarLocadora.Negocio\\CarLocadora.Negocio.csproj",
+      "projectPath": "C:\\Users\\User\\Desktop\\aulas daniel\\CAR-LOCADORA\\CarLocadora.Negocio\\CarLocadora.Negocio.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Source\\Repos\\Projeto-CarLocadora\\CarLocadora.Negocio\\obj\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\aulas daniel\\CAR-LOCADORA\\CarLocadora.Negocio\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1980,8 +1980,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\User\\Source\\Repos\\Projeto-CarLocadora\\CarLocadora.infra\\CarLocadora.infra.csproj": {
-              "projectPath": "C:\\Users\\User\\Source\\Repos\\Projeto-CarLocadora\\CarLocadora.infra\\CarLocadora.infra.csproj"
+            "C:\\Users\\User\\Desktop\\aulas daniel\\CAR-LOCADORA\\CarLocadora.infra\\CarLocadora.infra.csproj": {
+              "projectPath": "C:\\Users\\User\\Desktop\\aulas daniel\\CAR-LOCADORA\\CarLocadora.infra\\CarLocadora.infra.csproj"
             }
           }
         }

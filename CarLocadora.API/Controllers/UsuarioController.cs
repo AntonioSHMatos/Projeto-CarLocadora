@@ -17,26 +17,29 @@ namespace CarLocadora.API.Controllers
         }
 
         [HttpPost()]
-        public void Post([FromBody] UsuarioModel usuario)
+        public async Task Post([FromBody] UsuarioModel usuario)
         {
-            _usuario.Inserir(usuario);
+            await _usuario.Inserir(usuario);
 
         }
+
         [HttpPut()]
-        public void Put([FromBody] UsuarioModel usuario)
+        public async Task Put([FromBody] UsuarioModel usuario)
         {
-            _usuario.Alterar(usuario);
+            await _usuario.Alterar(usuario);
 
         }
+
         [HttpGet()]
-        public List<UsuarioModel> Get()
+        public async Task<List<UsuarioModel>> Get()
         {
-            return _usuario.ObterLista();
+            return await _usuario.ObterLista();
         }
+
         [HttpGet("ObterUmUsuario")]
-        public UsuarioModel Get([FromQuery] string cpf)
+        public async Task<UsuarioModel> Get([FromQuery] string cpf)
         {
-            return _usuario.ObterUmUsuario(cpf);
+            return await _usuario.ObterUmUsuario(cpf);
         }
     }
 }
