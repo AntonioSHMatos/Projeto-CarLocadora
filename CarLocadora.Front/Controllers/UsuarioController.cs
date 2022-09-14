@@ -12,10 +12,14 @@ namespace CarLocadora.Front.Controllers
     {
         private readonly IOptions<DadosBase> _dadosbase;
         private readonly IApiToken _apiToken;
-        public UsuarioController(IOptions<DadosBase> dadosbase, IApiToken apiToken)
+        private readonly HttpClient _httpClient;
+        public UsuarioController(IOptions<DadosBase> dadosbase, IApiToken apiToken, IHttpClientFactory httpClient)
         {
             _dadosbase = dadosbase;
             _apiToken = apiToken;
+            _httpClient = httpClient.CreateClient();
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
         // GET: UsuarioController
         public async Task<ActionResult> Index(string mensagem = null, bool sucesso = true)
@@ -25,13 +29,10 @@ namespace CarLocadora.Front.Controllers
             else
                 TempData["erro"] = mensagem;
 
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-            HttpResponseMessage response = client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Usuario").Result;
+            HttpResponseMessage response = _httpClient.GetAsync($"{_dadosbase.Value.API_URL_BASE}Usuario").Result;
             // HttpResponseMessage response = client.GetAsync($"https://localhost:44357/api/Usuario").Result;
             if (response.IsSuccessStatusCode)
             {
@@ -60,13 +61,10 @@ namespace CarLocadora.Front.Controllers
         {
             if (ModelState.IsValid)
             {
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-                HttpResponseMessage response = await client.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Usuario", usuario);
+                HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Usuario", usuario);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -87,13 +85,11 @@ namespace CarLocadora.Front.Controllers
             if (ModelState.IsValid)
             {
 
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-                HttpResponseMessage response = await client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Usuario/ObterUmUsuario?cpf={cpf}");
+                HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosbase.Value.API_URL_BASE}Usuario/ObterUmUsuario?cpf={cpf}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -118,12 +114,10 @@ namespace CarLocadora.Front.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    HttpClient client = new HttpClient();
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
-                    HttpResponseMessage response = await client.PutAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Usuario", usuario);
+                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+
+                    HttpResponseMessage response = await _httpClient.PutAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Usuario", usuario);
 
                     if (response.IsSuccessStatusCode)
                     {

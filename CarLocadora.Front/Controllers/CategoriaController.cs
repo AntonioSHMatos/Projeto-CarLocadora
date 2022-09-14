@@ -15,11 +15,15 @@ namespace CarLocadora.Front.Controllers
     {
         private readonly IOptions<DadosBase> _dadosbase;
         private readonly IApiToken _apiToken;
+        private readonly HttpClient _httpClient;
 
-        public CategoriaController(IOptions<DadosBase> dadosbase, IApiToken apiToken)
+        public CategoriaController(IOptions<DadosBase> dadosbase, IApiToken apiToken,IHttpClientFactory httpClient)
         {
             _dadosbase = dadosbase;
             _apiToken = apiToken;
+            _httpClient = httpClient.CreateClient();
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
         // GET: CategoriaController
         public async Task<IActionResult> Index(string mensagem = null, bool sucesso = true)
@@ -29,16 +33,13 @@ namespace CarLocadora.Front.Controllers
             else
                 TempData["erro"] = mensagem;
 
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
-
-
-            HttpResponseMessage response = await client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria");
+            
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+            HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria");
 
             if (response.IsSuccessStatusCode)
             {
+
                 string conteudo = await response.Content.ReadAsStringAsync();
                 return View(JsonConvert.DeserializeObject<List<CategoriaModel>>(conteudo));
             }
@@ -62,13 +63,11 @@ namespace CarLocadora.Front.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm] CategoriaModel categoria)
         {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",await  _apiToken.Obter());
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",await  _apiToken.Obter());
 
 
-            HttpResponseMessage response = await client.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Categoria", categoria);
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Categoria", categoria);
 
             if (response.IsSuccessStatusCode)
             {
@@ -83,13 +82,11 @@ namespace CarLocadora.Front.Controllers
         // GET: CategoriaController/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-            HttpResponseMessage response = await  client.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria/ObterDadosCategoria?id={id}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria/ObterDadosCategoria?id={id}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -117,12 +114,10 @@ namespace CarLocadora.Front.Controllers
                 {
 
 
-                    HttpClient client = new HttpClient();
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
-                    HttpResponseMessage response = await client.PutAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Categoria", categoria);
+                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+
+                    HttpResponseMessage response = await _httpClient.PutAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Categoria", categoria);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -147,11 +142,9 @@ namespace CarLocadora.Front.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
-            HttpResponseMessage response = await client.DeleteAsync($"{_dadosbase.Value.API_URL_BASE}Categoria?id={id}");
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
+            HttpResponseMessage response = await _httpClient.DeleteAsync($"{_dadosbase.Value.API_URL_BASE}Categoria?id={id}");
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction(nameof(Index), new { mensagem = "Registro excluído!", sucesso = true });

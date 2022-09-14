@@ -10,6 +10,7 @@ namespace CarLocadora.Front.ServicoExtensoes
         {
               services.AddSingleton<IApiToken, ApiToken>();
               services.AddSingleton<LoginRespostaModel>();
+              services.AddHttpClient();
         }
 
 
