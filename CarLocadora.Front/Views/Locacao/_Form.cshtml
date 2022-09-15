@@ -1,0 +1,58 @@
+﻿@model CarLocadora.Models.Models.LocacaoModel
+
+
+<div class="row">
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label asp-for="ClienteCPF" class="control-label"></label>
+            <select asp-for="ClienteCPF" asp-items="ViewBag.Clientes" class="form-control text-uppercase">
+            <option disabled selected> </option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label asp-for="FormaPagamentoId" class="control-label"></label>
+            <select asp-for="FormaPagamentoId" asp-items="ViewBag.FormasDePagamentos" class="form-control text-uppercase">
+            <option disabled selected> </option>
+            </select>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="DataHoraReserva" class="control-label"></label>
+            <input asp-for="DataHoraReserva" class="form-control" />
+            <span asp-validation-for="DataHoraReserva" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="DataHoraRetiradaPrevista" class="control-label"></label>
+            <input asp-for="DataHoraRetiradaPrevista" class="form-control" />
+            <span asp-validation-for="DataHoraRetiradaPrevista" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="form-group">
+            <label asp-for="VeiculoPlaca" class="control-label"></label>
+            <select asp-for="VeiculoPlaca" asp-items="ViewBag.Veiculos" class="form-control text-uppercase">
+            <option disabled selected> </option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="DataHoraDevolucaoPrevista" class="control-label"></label>
+            <input asp-for="DataHoraDevolucaoPrevista" class="form-control" />
+            <span asp-validation-for="DataHoraDevolucaoPrevista" class="text-danger"></span>
+        </div>
+    </div>
+
+</div>
