@@ -1,11 +1,7 @@
 ﻿using CarLocadora.Entity;
 using CarLocadora.Models.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace CarLocadora.Negocio.Categoria
 {

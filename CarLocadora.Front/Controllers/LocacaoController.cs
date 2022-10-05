@@ -1,5 +1,5 @@
-﻿using CarLocadora.Front.Models;
-using CarLocadora.Front.Servico;
+﻿using CarLocadora.Comum.Models;
+using CarLocadora.Comum.Servico;
 using CarLocadora.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;

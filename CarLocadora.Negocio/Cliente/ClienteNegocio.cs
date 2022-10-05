@@ -1,10 +1,8 @@
 ﻿using CarLocadora.Entity;
 using CarLocadora.Models.Models;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace CarLocadora.Negocio.Cliente
 {
@@ -25,19 +23,28 @@ namespace CarLocadora.Negocio.Cliente
         public void Inserir(ClienteModel cliente)
         {
             cliente.DataInclusao = DateTime.Now;
-             _context.AddAsync(cliente);
-             _context.SaveChanges();
+            _context.AddAsync(cliente);
+            _context.SaveChanges();
         }
 
-        public List<ClienteModel> ObterLista()
+        public  List<ClienteModel> ObterLista()
         {
             return _context.Cliente.ToList();
         }
-        public ClienteModel ObterUmCliente(string cpf)
-        {            
+
+       
+        public  ClienteModel ObterUmCliente(string cpf)
+        {
             return _context.Cliente.SingleOrDefault(x => x.CPF == cpf);
-            
+
         }
+
+        public  List <ClienteModel> ObterListaEnviarEmail()
+        {
+            return  _context.Cliente.Where(x => x.Email != null && x.emailEnviado.Equals(false)).ToList();
+        }
+
+        
     }
 }
 

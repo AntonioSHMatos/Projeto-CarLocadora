@@ -1,5 +1,5 @@
-using CarLocadora.Front.Models;
-using CarLocadora.Front.Servico;
+using CarLocadora.Comum.Models;
+using CarLocadora.Comum.Servico;
 using CarLocadora.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -47,7 +47,7 @@ namespace CarLocadora.Front.Controllers
             }
         }
 
-       
+
 
         // GET: VeiculoController/Create
         public ActionResult Create()
@@ -138,7 +138,7 @@ namespace CarLocadora.Front.Controllers
             }
 
         }
-        
+
         private async Task<List<SelectListItem>> CarregarCategoriasDeVeiculos()
         {
             List<SelectListItem> lista = new List<SelectListItem>();

@@ -1,8 +1,6 @@
-using CarLocadora.Front.Models;
-using CarLocadora.Front.Servico;
-
+using CarLocadora.Comum.Models;
+using CarLocadora.Comum.Servico;
 using CarLocadora.Models.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -50,7 +48,7 @@ namespace CarLocadora.Front.Controllers
             }
         }
 
-        
+
 
         // GET: FormaPagamentoController/Create
         public ActionResult Create()
@@ -82,10 +80,10 @@ namespace CarLocadora.Front.Controllers
         }
 
         // GET: FormaPagamentoController/Edit/5
-        public  async Task<ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
 
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",await  _apiToken.Obter());
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
             HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosbase.Value.API_URL_BASE}FormaPagamento/ObterUmPagamento?id={id}");
 
@@ -136,6 +134,6 @@ namespace CarLocadora.Front.Controllers
 
         }
 
-        
+
     }
 }

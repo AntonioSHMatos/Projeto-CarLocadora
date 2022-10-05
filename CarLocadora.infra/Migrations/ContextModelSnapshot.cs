@@ -91,6 +91,10 @@ namespace CarLocadora.infra.Migrations
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("Estado")
                         .IsRequired()
                         .HasMaxLength(2)
@@ -114,6 +118,9 @@ namespace CarLocadora.infra.Migrations
                     b.Property<string>("Telefone")
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
+
+                    b.Property<bool>("emailEnviado")
+                        .HasColumnType("bit");
 
                     b.HasKey("CPF");
 

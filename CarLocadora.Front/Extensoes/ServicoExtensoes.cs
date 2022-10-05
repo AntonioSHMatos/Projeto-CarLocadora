@@ -1,5 +1,4 @@
-﻿
-using CarLocadora.Front.Servico;
+﻿using CarLocadora.Comum.Servico;
 using CarLocadora.Models.Models;
 
 namespace CarLocadora.Front.ServicoExtensoes
@@ -8,9 +7,9 @@ namespace CarLocadora.Front.ServicoExtensoes
     {
         public static void ConfigurarServicos(this IServiceCollection services)
         {
-              services.AddSingleton<IApiToken, ApiToken>();
-              services.AddSingleton<LoginRespostaModel>();
-              services.AddHttpClient();
+            services.AddSingleton<IApiToken, ApiToken>();
+            services.AddSingleton<LoginRespostaModel>();
+            services.AddHttpClient();
         }
 
 

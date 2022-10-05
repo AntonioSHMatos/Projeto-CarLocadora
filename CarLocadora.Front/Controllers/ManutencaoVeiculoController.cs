@@ -1,12 +1,11 @@
-﻿using CarLocadora.Front.Models;
-using CarLocadora.Front.Servico;
+﻿using CarLocadora.Comum.Models;
+using CarLocadora.Comum.Servico;
 using CarLocadora.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
 
 namespace CarLocadora.Front.Controllers
 {
@@ -36,7 +35,7 @@ namespace CarLocadora.Front.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                string conteudo = await  response.Content.ReadAsStringAsync();
+                string conteudo = await response.Content.ReadAsStringAsync();
                 return View(JsonConvert.DeserializeObject<List<ManutencaoVeiculoModel>>(conteudo));
             }
             else
@@ -44,8 +43,8 @@ namespace CarLocadora.Front.Controllers
                 throw new Exception("LIGUE PARA O DEV!");
             }
         }
-          
-        
+
+
 
         public async Task<IActionResult> Create()
         {
@@ -64,7 +63,7 @@ namespace CarLocadora.Front.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",await  _apiToken.Obter());
+                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
                     HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}ManutencaoVeiculo", manutencao);
@@ -152,7 +151,7 @@ namespace CarLocadora.Front.Controllers
 
 
 
-        public  async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
@@ -195,7 +194,8 @@ namespace CarLocadora.Front.Controllers
 
                 return lista;
             }
-            else            {
+            else
+            {
                 throw new Exception(response.ReasonPhrase);
             }
         }

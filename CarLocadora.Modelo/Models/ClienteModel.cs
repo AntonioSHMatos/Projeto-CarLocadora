@@ -22,7 +22,7 @@ namespace CarLocadora.Models.Models
         [StringLength(150, ErrorMessage = "Este Campo deve ter no mínimo 5 e no maximo 150caracteres")]
         public string Nome { get; set; } = "";
 
-        [Display(Name = "Nome Obrigatorio")]
+        [Display(Name = "Data Nascimento é Obrigatorio")]
         public DateTime DataNascimento { get; set; }
 
 
@@ -33,6 +33,14 @@ namespace CarLocadora.Models.Models
         [Required(ErrorMessage = "Celular é Obrigatório")]
         [StringLength(15, ErrorMessage = "Campo Maximo de 15 Caracteres")]
         public string Celular { get; set; } = "";
+
+
+        [StringLength(100, ErrorMessage = "Campo Maximo de 100 Caracteres")]
+        public string ? Email { get; set; }
+
+        
+        public bool emailEnviado { get; set; }
+
 
         [Required(ErrorMessage = "Logradouro é Obrigatório")]
         [StringLength(50, ErrorMessage = "Campo minimo de 5 caracteres Maximo de 50 Caracteres")]
@@ -63,5 +71,7 @@ namespace CarLocadora.Models.Models
 
         [Required(ErrorMessage = "Campo é Obrigatório")]
         public bool Ativo { get; set; }
+
+       
     }
 }

@@ -1,5 +1,5 @@
-﻿using CarLocadora.Front.Models;
-using CarLocadora.Front.Servico;
+﻿using CarLocadora.Comum.Models;
+using CarLocadora.Comum.Servico;
 using CarLocadora.Models.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -48,7 +48,7 @@ namespace CarLocadora.Front.Controllers
             }
 
         }
-       
+
 
 
 
@@ -65,10 +65,10 @@ namespace CarLocadora.Front.Controllers
         public async Task<ActionResult> Create([FromForm] VistoriaModel vistoria)
         {
 
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",await  _apiToken.Obter());
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
-            HttpResponseMessage response =  await _httpClient.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Vistoria", vistoria);
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Vistoria", vistoria);
 
             if (response.IsSuccessStatusCode)
             {
@@ -144,13 +144,13 @@ namespace CarLocadora.Front.Controllers
             List<SelectListItem> lista = new List<SelectListItem>();
 
 
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",  await _apiToken.Obter());
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
             HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosbase.Value.API_URL_BASE}Locacao");
 
             if (response.IsSuccessStatusCode)
             {
-                List<LocacaoModel> locacoes = JsonConvert.DeserializeObject<List<LocacaoModel>>( response.Content.ReadAsStringAsync().Result);
+                List<LocacaoModel> locacoes = JsonConvert.DeserializeObject<List<LocacaoModel>>(response.Content.ReadAsStringAsync().Result);
 
                 foreach (var linha in locacoes)
                 {

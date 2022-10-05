@@ -13,5 +13,9 @@ namespace CarLocadora.Negocio.Cliente
         void Alterar(ClienteModel cliente);
         void Inserir(ClienteModel cliente);
         ClienteModel ObterUmCliente(string cpf);
+  
+        List<ClienteModel> ObterListaEnviarEmail();
+        
+
     }
 }

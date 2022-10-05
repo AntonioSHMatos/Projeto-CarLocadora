@@ -1,7 +1,6 @@
-﻿using CarLocadora.Front.Models;
-using CarLocadora.Front.Servico;
+﻿using CarLocadora.Comum.Models;
+using CarLocadora.Comum.Servico;
 using CarLocadora.Models.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -35,7 +34,7 @@ namespace CarLocadora.Front.Controllers
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
             HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosbase.Value.API_URL_BASE}Cliente");
 
-            
+
             if (response.IsSuccessStatusCode)
             {
                 string conteudo = await response.Content.ReadAsStringAsync();
@@ -43,10 +42,10 @@ namespace CarLocadora.Front.Controllers
             }
             else
             {
-                throw new Exception(" LIGUE PARA O DEV!");
+                throw new Exception(" Sistema com Erro!");
             }
         }
-       
+
 
 
 
@@ -71,7 +70,7 @@ namespace CarLocadora.Front.Controllers
             }
             else
             {
-                throw new Exception("LIGUE PARA O DEV!");
+                throw new Exception("Sistema com Erro!");
             }
         }
 
@@ -91,7 +90,7 @@ namespace CarLocadora.Front.Controllers
             }
             else
             {
-                throw new Exception("LIGUE PARA O DEV!");
+                throw new Exception("Sistema com Erro!");
             }
 
 
@@ -121,7 +120,7 @@ namespace CarLocadora.Front.Controllers
                     }
                     else
                     {
-                        throw new Exception("LIGUE PARA O DEV!");
+                        throw new Exception("Sistema com Erro!");
                     }
 
                 }
@@ -137,7 +136,7 @@ namespace CarLocadora.Front.Controllers
         }
 
 
-        
+
 
     }
 }

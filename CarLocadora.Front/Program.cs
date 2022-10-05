@@ -1,4 +1,4 @@
-using CarLocadora.Front.Models;
+using CarLocadora.Comum.Models;
 using CarLocadora.Front.ServicoExtensoes;
 
 var builder = WebApplication.CreateBuilder(args);

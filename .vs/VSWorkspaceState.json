@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\CarLocadora.API",
-    "\\CarLocadora.API\\Controllers",
-    "\\CarLocadora.Front",
-    "\\CarLocadora.Negocio",
-    "\\CarLocadora.Negocio\\Categoria"
+    ""
   ],
+  "SelectedNode": "\\CAR-LOCADORA.sln",
   "PreviewInSolutionExplorer": false
 }

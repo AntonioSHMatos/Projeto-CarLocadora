@@ -11,35 +11,43 @@ namespace CarLocadora.API.Controllers
     [Authorize]
     public class ClienteController : ControllerBase
     {
-        private readonly IClienteNegocio _cliente;
+        private readonly IClienteNegocio _clienteNegocio;
         public ClienteController(IClienteNegocio cliente)
         {
-            _cliente = cliente;
+            _clienteNegocio = cliente;
         }
 
         [HttpGet]
         public List<ClienteModel> Get()
         {
-            return _cliente.ObterLista();
+            return _clienteNegocio.ObterLista();
         }
 
 
         [HttpPost()]
         public void Post([FromBody] ClienteModel cliente)
         {
-            _cliente.Inserir(cliente);
+            _clienteNegocio.Inserir(cliente);
                        
         }
         [HttpPut()]
         public void Put([FromBody] ClienteModel cliente)
         {
-            _cliente.Alterar(cliente);
+            _clienteNegocio.Alterar(cliente);
 
         }
         [HttpGet("ObterUmCliente")]
         public ClienteModel Get([FromQuery] string cpf)
         {
-            return _cliente.ObterUmCliente(cpf);
+            return _clienteNegocio.ObterUmCliente(cpf);
         }
+
+        [HttpGet("ObterListaEnviarEmail")]
+        public  List<ClienteModel> ObterListaEnviarEmail()
+        {
+            return _clienteNegocio.ObterListaEnviarEmail();
+
+        }
+
     }
 }

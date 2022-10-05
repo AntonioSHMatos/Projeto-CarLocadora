@@ -1,8 +1,7 @@
 
-using CarLocadora.Front.Models;
-using CarLocadora.Front.Servico;
+using CarLocadora.Comum.Models;
+using CarLocadora.Comum.Servico;
 using CarLocadora.Models.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -17,7 +16,7 @@ namespace CarLocadora.Front.Controllers
         private readonly IApiToken _apiToken;
         private readonly HttpClient _httpClient;
 
-        public CategoriaController(IOptions<DadosBase> dadosbase, IApiToken apiToken,IHttpClientFactory httpClient)
+        public CategoriaController(IOptions<DadosBase> dadosbase, IApiToken apiToken, IHttpClientFactory httpClient)
         {
             _dadosbase = dadosbase;
             _apiToken = apiToken;
@@ -33,7 +32,7 @@ namespace CarLocadora.Front.Controllers
             else
                 TempData["erro"] = mensagem;
 
-            
+
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
             HttpResponseMessage response = await _httpClient.GetAsync($"{_dadosbase.Value.API_URL_BASE}Categoria");
 
@@ -49,7 +48,7 @@ namespace CarLocadora.Front.Controllers
             }
 
         }
-        
+
 
 
 
@@ -58,13 +57,13 @@ namespace CarLocadora.Front.Controllers
             return View();
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([FromForm] CategoriaModel categoria)
         {
 
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",await  _apiToken.Obter());
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
 
 
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_dadosbase.Value.API_URL_BASE}Categoria", categoria);
