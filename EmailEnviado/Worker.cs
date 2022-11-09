@@ -1,11 +1,8 @@
-using CarLocadora.Comum.Models;
-using CarLocadora.Comum.Servico;
+using CarLocadora.infra.RabbitMQFactory;
 using CarLocadora.Models.Models;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using RabbitMQ.Client;
 using System.Net;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
 using System.Net.Mail;
 using System.Text;
 
@@ -14,19 +11,12 @@ namespace EmailEnviado
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private readonly HttpClient _httpClient;
-        private readonly IApiToken _apiToken;
-        private readonly IOptions<DadosBase> _dadosBase;
+        private readonly RabbitMQFactory _rabbitMQFactory;
 
-
-
-        public Worker(ILogger<Worker> logger, IHttpClientFactory httpClient, IApiToken apiToken, IOptions<DadosBase> dadosBase)
+        public Worker(ILogger<Worker> logger, RabbitMQFactory rabbitMQFactory)
         {
             _logger = logger;
-            _httpClient = httpClient.CreateClient();
-
-            _apiToken = apiToken;
-            _dadosBase = dadosBase;
+            _rabbitMQFactory = rabbitMQFactory;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -38,44 +28,29 @@ namespace EmailEnviado
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
 
+                var canal = _rabbitMQFactory.GetChannel();
 
-                List<ClienteModel> clientes = await ObterClientes();
-
-
-
-                foreach (var cliente in clientes)
+                while (true)
                 {
-                    try
+                    BasicGetResult retorno = canal.BasicGet("NovosClientes", false);
+                    if (retorno == null)
                     {
-                        await EnviarEmail(cliente.Email, cliente.Nome);
-                        await AtualizarCliente(cliente);
-                        //atualizar no banco para não enviar mais.
+                        break;
                     }
-                    catch (Exception)
+                    else
                     {
-                        continue;
+                        var dados = JsonConvert.DeserializeObject<ClienteModel>(Encoding.UTF8.GetString(retorno.Body.ToArray()));
+
+                        await EnviarEmail(dados.Email, dados.Nome);
+
+                        canal.BasicAck(retorno.DeliveryTag, true);
                     }
-                                       
                 }
+
                 await Task.Delay(35000, stoppingToken);
             }
         }
-        private async Task<List<ClienteModel>> ObterClientes()
-        {
 
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
-            HttpResponseMessage retorno = await _httpClient.GetAsync($"{_dadosBase.Value.API_URL_BASE}Cliente/ObterListaEnviarEmail");
-            if (retorno.IsSuccessStatusCode)
-            {
-
-
-                return JsonConvert.DeserializeObject<List<ClienteModel>>(await retorno.Content.ReadAsStringAsync());
-            }
-            else
-            {
-                throw new Exception(retorno.ReasonPhrase);
-            }
-        }
         private async Task EnviarEmail(string email, string nome)
         {
             MailMessage mensagem = new MailMessage();
@@ -95,6 +70,7 @@ namespace EmailEnviado
             smtpCliente.Send(mensagem);
 
         }
+
         private string EmailBoasVindas(string nome)
         {
             StringBuilder sb = new StringBuilder();
@@ -104,29 +80,6 @@ namespace EmailEnviado
             sb.Append($"<br>");
             sb.Append($"<p>Grande abraço</p>");
             return sb.ToString();
-        }
-
-        private async Task AtualizarCliente(ClienteModel cliente)
-        {
-            cliente.emailEnviado = true;
-
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await _apiToken.Obter());
-
-            HttpResponseMessage response = await _httpClient.PutAsJsonAsync($"{_dadosBase.Value.API_URL_BASE}Cliente", cliente);
-
-
-            if (response.IsSuccessStatusCode)
-            {
-
-
-            }
-            else
-            {
-                throw new Exception("Sistema com Erro!");
-            }
-
-
-
 
         }
     }
