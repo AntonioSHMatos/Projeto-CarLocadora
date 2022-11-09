@@ -50,9 +50,9 @@ namespace CarLocadora.Front.Controllers
 
 
         // GET: VeiculoController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            ViewBag.CategoriasDeVeiculos = CarregarCategoriasDeVeiculos();
+            ViewBag.CategoriasDeVeiculos = await CarregarCategoriasDeVeiculos();
 
             return View();
         }

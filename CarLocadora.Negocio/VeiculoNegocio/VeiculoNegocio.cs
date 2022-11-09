@@ -1,5 +1,6 @@
 ﻿using CarLocadora.Entity;
 using CarLocadora.Models.Models;
+using CarLocadora.Negocio.RabbitMQ;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,12 @@ namespace CarLocadora.Negocio.VeiculoNegocio.cs
     public class VeiculoNegocio : IVeiculoNegocio
     {
         private readonly Context _context;
-        public VeiculoNegocio(Context context)
+        private readonly IRabbitMQNegocio _rabbitMQNegocio;
+
+        public VeiculoNegocio(Context context, IRabbitMQNegocio rabbitMQNegocio)
         {
             _context = context;
+            _rabbitMQNegocio = rabbitMQNegocio;
         }
         public async Task Alterar(VeiculoModel veiculo)
         {
@@ -29,6 +33,8 @@ namespace CarLocadora.Negocio.VeiculoNegocio.cs
             veiculo.DataInclusao = DateTime.Now;
              _context.Add(veiculo);
              await _context.SaveChangesAsync();
+
+            _rabbitMQNegocio.PublicarMensagem(veiculo, "", "NovosVeiculos");
         }
 
         public async Task <List<VeiculoModel>> ObterLista()

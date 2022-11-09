@@ -33,7 +33,7 @@ namespace CarLocadora.Models.Models
         [Display(Name = "Combustivel ")]
         [Required(ErrorMessage = "Campo é obrigatório")]
         [StringLength(100,  ErrorMessage = "Campo Maximo de 100 Caracteres")]
-        public string combustivel;
+        public string Combustivel { get; set; }
 
 
         [Display(Name = "Cor ")]
